@@ -8,10 +8,8 @@
 </head>
 <body>
   <h1>Maps</h1>
-  <ol>
-    <li><img src ="../docs/map1.png"></li>
-    <li><img src ="../docs/map2.png"></li>
-    <li><img src ="../docs/map3.png"></li>
-  </ol>
+  <% for (const mapURL of mapURLs) { %>
+    <li><img src="<%= mapURL.url %>"></li>
+  <% } %>
 </body>
 </html>
