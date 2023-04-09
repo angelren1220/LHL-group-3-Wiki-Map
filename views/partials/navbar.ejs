@@ -1,0 +1,16 @@
+
+<link rel="stylesheet" href="../../styles/navbar.scss">
+<body>
+  <nav class ="navbar">
+    <div class ="nav_links">
+      <a href="/"><img class="Icon" src="../../docs/maps_icon.png" alt="logo"></a>
+      <% if (user) { %>
+        <a href="/maps/new">New Map</a>
+      <% } else { %>
+        <a href="/users/login">Login</a>
+      <% } %>
+      <a href="/maps/list">Maps</a>
+    </div>
+  </nav>
+</body>
+</html>
