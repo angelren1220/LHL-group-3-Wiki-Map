@@ -1,10 +1,19 @@
 const db = require('../connection');
 
-const getUsers = () => {
-  return db.query('SELECT * FROM users;')
-    .then(data => {
-      return data.rows;
-    });
+const getUserWithEmail = (email) => {
+
 };
 
-module.exports = { getUsers };
+const addUser = (user) => {
+
+};
+
+const getUserWithId = (id) => {
+
+};
+
+module.exports = {
+  getUserWithEmail,
+  addUser,
+  getUserWithId
+};
