@@ -5,7 +5,7 @@ const db = require('../db/connection');
 router.get('/', (req, res) => {
   db.query('SELECT url FROM maps;')
     .then(data => {
-      const templateVars = {mapURLs: data.rows};
+      const templateVars = { mapURLs: data.rows };
       return res.render('maps_index', templateVars);
     })
     .catch(err => {
@@ -17,6 +17,10 @@ router.get('/', (req, res) => {
 
 router.get('/new', (req, res) => {
   res.render('maps_new');
+});
+
+router.get('/test', (req, res) => {
+  res.render('maps_test');
 });
 
 module.exports = router;
