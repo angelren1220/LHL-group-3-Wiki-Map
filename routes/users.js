@@ -19,11 +19,11 @@ router.post("/login", (req, res) => {
 
   userQueries.getUserWithEmail(email).then((user) => {
     if (!user) {
-      return res.send({ error: "error" });
+      return res.send({ error: "error user not exists" });
     }
 
     if (!bcrypt.compareSync(password, user.password)) {
-      return res.send({ error: "error" });
+      return res.send({ error: "error password wrong" });
     }
 
     req.session.userId = user.id;
@@ -44,7 +44,7 @@ router.post("/logout", (req, res) => {
 });
 
 // Register a new user
-router.post("/", (req, res) => {
+router.post("/register", (req, res) => {
   const user = req.body;
   user.password = bcrypt.hashSync(user.password, 12);
   userQueries
@@ -76,18 +76,21 @@ router.get('/logout', (req, res) => {
 
 router.get("/register", (req, res) => {
   // if user is logged in, redirect to url
-  const userId = req.session.user_id;
-  const user = userQueries.getUserWithId();
-  if (user) {
-    return res.redirect("/");
-  }
+  /***to do!!!! now getUserWithID returns a promise (true) so it will redirect to  homepage ***/
+  // const userId = req.session.user_id;
+  // const user = userQueries.getUserWithId(userId);
+
+  // if (userQueries.getUserWithId(userId)) {
+  //   console.log(user);
+  //   return res.redirect("/");
+  // }
 
   // otherwise create a new user template
   const templateVars = {
     id: req.body.id,
     email: req.body.email,
     password: req.body.password,
-    user
+    // user
   };
 
   res.render('register', templateVars);

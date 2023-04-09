@@ -14,20 +14,27 @@
       <a href="/users/login">Login</a>
     </div>
     <form action="/users/register" method="POST">
-      <div class="form-group">
+      <div>
+        <label for="name">Name</label>
+        <input
+          type="name"
+          name="name"
+          id="name"
+          placeholder="name"
+        />
+      </div>
+      <div>
         <label for="email">Email</label>
         <input
-          class="form-control"
           type="email"
           name="email"
           id="email"
           placeholder="example@gmail.com"
         />
       </div>
-      <div class="form-group">
+      <div>
         <label for="password">Password</label>
         <input
-          class="form-control"
           type="password"
           name="password"
           id="password"
