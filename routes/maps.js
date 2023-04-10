@@ -7,16 +7,16 @@ const router = express.Router();
 // get methods
 router.get('/', (req, res) => {
   mapsQueries.getMaps().then((data) => {
-    const userId = req.session.user_id;
-    const user = userQueries.getUserWithId(userId);
+    const userEmail = req.session.user_email;
+    const user = userQueries.getUserWithEmail(userEmail);
     const templateVars = { mapURLs: data, user };
     return res.render('maps_index', templateVars);
   });
 });
 
 router.get('/new', (req, res) => {
-  const userId = req.session.user_id;
-  const user = userQueries.getUserWithId(userId);
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
   const templateVars = { user };
   res.render('maps_new', templateVars);
 });
