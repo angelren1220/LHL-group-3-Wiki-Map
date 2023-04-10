@@ -66,7 +66,6 @@ router.get('/', (req, res) => {
   const userId = req.session.userId;
   const user = userQueries.getUserWithId(userId);
   const templateVars = {user};
-  console.log(user);
   res.render('users', templateVars);
 });
 

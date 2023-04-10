@@ -7,6 +7,8 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieSession = require("cookie-session");
 
+const userQueries = require('./db/queries/users');
+
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -45,6 +47,7 @@ const mapsRoutes = require('./routes/maps');
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/maps', mapsRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -52,7 +55,10 @@ app.use('/maps', mapsRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+  const userId = req.session.userId;
+  const user = userQueries.getUserWithId(userId);
+  const templateVars = {user};
+  res.render('index', templateVars);
 });
 
 app.listen(PORT, () => {
