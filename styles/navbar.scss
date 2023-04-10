@@ -1,0 +1,29 @@
+.nav_links{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.navbar{
+  display: flex;
+  background-color: #136F63;
+  width: 100%;
+  height: 100px;
+}
+
+a{
+  display: flex;
+  color: white;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 40px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
