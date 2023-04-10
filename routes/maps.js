@@ -21,4 +21,8 @@ router.get('/new', (req, res) => {
   res.render('maps_new', templateVars);
 });
 
+router.get('/test', (req, res) => {
+  res.render('maps_test');
+});
+
 module.exports = router;
