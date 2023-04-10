@@ -32,7 +32,7 @@ router.post("/login", (req, res) => {
         name: user.name,
         email: user.email,
         id: user.id,
-      },
+      }
     });
   });
 });
@@ -63,34 +63,42 @@ router.post("/register", (req, res) => {
 
 // get methods
 router.get('/', (req, res) => {
-  res.render('users');
+  const userId = req.session.userId;
+  const user = userQueries.getUserWithId(userId);
+  const templateVars = {user};
+  console.log(user);
+  res.render('users', templateVars);
 });
 
 router.get('/login', (req, res) => {
-  res.render('login');
+  const userId = req.session.userId;
+  const user = userQueries.getUserWithId(userId);
+  const templateVars = {user};
+  res.render('login', templateVars);
 });
 
 router.get('/logout', (req, res) => {
-  res.redirect('/');
+  const userId = req.session.userId;
+  const user = userQueries.getUserWithId(userId);
+  const templateVars = {user};
+  res.redirect('/', templateVars);
 });
 
 router.get("/register", (req, res) => {
   // if user is logged in, redirect to url
   /***to do!!!! now getUserWithID returns a promise (true) so it will redirect to  homepage ***/
-  // const userId = req.session.user_id;
-  // const user = userQueries.getUserWithId(userId);
-
-  // if (userQueries.getUserWithId(userId)) {
-  //   console.log(user);
-  //   return res.redirect("/");
-  // }
+  const userId = req.session.userId;
+  const user = userQueries.getUserWithId(userId);
+  if (userQueries.getUserWithId(userId)) {
+    return res.redirect("/users");
+  }
 
   // otherwise create a new user template
   const templateVars = {
     id: req.body.id,
     email: req.body.email,
     password: req.body.password,
-    // user
+    user
   };
 
   res.render('register', templateVars);

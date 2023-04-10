@@ -6,13 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Login</title>
 </head>
+<%- include('navbar') %>
 <body>
   <main>
     <h3>User Login</h3>
-    <div>
-      <label>Don't have an account? &#128073</label>
-      <a href="/users/register">Register</a>
-    </div>
     <form action="/users/login" method="POST">
       <div>
         <label for="email">Email</label>
