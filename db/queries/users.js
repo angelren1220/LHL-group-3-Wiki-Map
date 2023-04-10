@@ -29,6 +29,9 @@ const addUser = (user) => {
 };
 
 const getUserWithId = (id) => {
+  if(!id) {
+    return null;
+  }
   return db.
   query(
     `SELECT * FROM users WHERE users.id = $1`,
