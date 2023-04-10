@@ -1,18 +1,14 @@
 const express = require('express');
-const router = express.Router();
-const db = require('../db/connection');
+const mapsQueries = require('../db/queries/maps');
 
+const router = express.Router();
+
+// get methods
 router.get('/', (req, res) => {
-  db.query('SELECT url FROM maps;')
-    .then(data => {
-      const templateVars = { mapURLs: data.rows };
-      return res.render('maps_index', templateVars);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+  mapsQueries.getMaps().then((data) => {
+    const templateVars = { mapURLs: data };
+    return res.render('maps_index', templateVars);
+  });
 });
 
 router.get('/new', (req, res) => {
