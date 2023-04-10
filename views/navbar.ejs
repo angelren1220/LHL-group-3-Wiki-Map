@@ -1,0 +1,19 @@
+<header>
+<link rel="stylesheet" href="/styles/navbar.css" />
+  <nav>
+      <div class ="nav_links">
+        <img class="logo" src="https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/kades-branch/docs/maps_icon.png?raw=true" alt="logo">
+      <% if (user) { %>
+        <form action="/users/logout" method="POST">
+          <label for="email">Hello!</label>
+            <button type="submit">Logout</button>
+        </form>
+        <a href="/maps/new">New Map</a>
+      <% } else { %>
+        <a href="/users/login">Login</a>
+        <a href="/users/register">Register</a>
+      <% } %>
+      <a href="/maps">Maps</a>
+      </div>
+  </nav>
+</header>

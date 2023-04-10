@@ -1,0 +1,38 @@
+header {
+  margin: 0;
+  padding: 0;
+}
+
+nav{
+  display: flex;
+  width: 100vw;
+  height: 100px;
+  justify-content: space-between;
+  flex-direction: row;
+  background-color: #136F63;
+}
+
+.nav_links{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+
+a{
+  color: white;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+
+img.logo {
+  height: 40%;
+  width: 10%;
+}
