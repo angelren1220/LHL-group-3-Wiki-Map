@@ -9,7 +9,7 @@ const express = require('express');
 const bcrypt = require("bcrypt");
 const userQueries = require('../db/queries/users');
 
-const router  = express.Router();
+const router = express.Router();
 
 // post methods
 // Log a user in
@@ -26,21 +26,15 @@ router.post("/login", (req, res) => {
       return res.send({ error: "error password wrong" });
     }
 
-    req.session.userId = user.id;
-    res.send({
-      user: {
-        name: user.name,
-        email: user.email,
-        id: user.id,
-      }
-    });
+    req.session.user_email = user.email;
+    res.redirect("/");
   });
 });
 
 // Log a user out
 router.post("/logout", (req, res) => {
-  req.session.userId = null;
-  res.send({});
+  req.session.user_email = null;
+  res.redirect("/");
 });
 
 // Register a new user
@@ -54,8 +48,8 @@ router.post("/register", (req, res) => {
         return res.send({ error: "error" });
       }
 
-      req.session.userId = user.id;
-      res.send("🤗");
+      req.session.user_email = req.body.email;
+      res.redirect("/");
     })
     .catch((err) => res.send(err));
 });
@@ -63,42 +57,42 @@ router.post("/register", (req, res) => {
 
 // get methods
 router.get('/', (req, res) => {
-  const userId = req.session.userId;
-  const user = userQueries.getUserWithId(userId);
-  const templateVars = {user};
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
+  const templateVars = { user };
   res.render('users', templateVars);
 });
 
 router.get('/login', (req, res) => {
-  const userId = req.session.userId;
-  const user = userQueries.getUserWithId(userId);
-  const templateVars = {user};
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
+
+  if (user) {
+    return res.redirect("/");
+  }
+
+  const templateVars = { user };
   res.render('login', templateVars);
 });
 
-router.get('/logout', (req, res) => {
-  const userId = req.session.userId;
-  const user = userQueries.getUserWithId(userId);
-  const templateVars = {user};
-  res.redirect('/', templateVars);
-});
+// router.get('/logout', (req, res) => {
+//   const userId = req.session.user_id;
+//   const user = userQueries.getUserWithId(userId);
+//   const templateVars = {user};
+//   res.redirect('/', templateVars);
+// });
 
 router.get("/register", (req, res) => {
   // if user is logged in, redirect to url
-  /***to do!!!! now getUserWithID returns a promise (true) so it will redirect to  homepage ***/
-  const userId = req.session.userId;
-  const user = userQueries.getUserWithId(userId);
-  if (userQueries.getUserWithId(userId)) {
-    return res.redirect("/users");
+
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
+  if (user) {
+    return res.redirect("/");
   }
 
   // otherwise create a new user template
-  const templateVars = {
-    id: req.body.id,
-    email: req.body.email,
-    password: req.body.password,
-    user
-  };
+  const templateVars = { user };
 
   res.render('register', templateVars);
 });

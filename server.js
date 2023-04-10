@@ -55,9 +55,9 @@ app.use('/maps', mapsRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  const userId = req.session.userId;
-  const user = userQueries.getUserWithId(userId);
-  const templateVars = {user};
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
+  const templateVars = { user };
   res.render('index', templateVars);
 });
 
