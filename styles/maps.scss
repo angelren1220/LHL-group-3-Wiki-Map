@@ -2,3 +2,21 @@
   height: 40em;
   width: 100%;
 }
+
+.pin-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pin-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.pin-img {
+  width: 20em;
+  height: 20em;
+  margin-left: 2%;
+}
