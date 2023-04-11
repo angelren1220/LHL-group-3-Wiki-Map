@@ -5,6 +5,9 @@ header {
 
 nav{
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100px;
   justify-content: space-between;
@@ -34,4 +37,20 @@ a{
 
 img.logo {
   width: 70px;
+}
+
+.logout-button{
+  background-color: #136F63;
+  border: solid white 3px;
+  border-radius: 10px;
+  color: white;
+  font-family: sans-serif;
+  font-size: 25px;
+}
+
+label{
+  color: white;
+  font-family: sans-serif;
+  font-size: 25px;
+  padding-right: 10px;
 }

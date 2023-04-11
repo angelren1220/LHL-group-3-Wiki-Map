@@ -4,15 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/new.css" />
   <title>Register</title>
 </head>
 <%- include('navbar') %>
 <body>
   <main>
-    <h3>User Register</h3>
+    <div class="functional">
+    <h3>User Registration</h3>
     <form action="/users/register" method="POST">
-      <div>
-        <label for="name">Name</label>
+      <div class="form-element">
+
         <input
           type="name"
           name="name"
@@ -20,8 +22,8 @@
           placeholder="name"
         />
       </div>
-      <div>
-        <label for="email">Email</label>
+      <div class="form-element">
+
         <input
           type="email"
           name="email"
@@ -29,8 +31,8 @@
           placeholder="example@gmail.com"
         />
       </div>
-      <div>
-        <label for="password">Password</label>
+      <div class="form-element">
+
         <input
           type="password"
           name="password"
@@ -38,8 +40,14 @@
           placeholder="password"
         />
       </div>
-      <button type="submit">Register</button>
+      <button type="submit" class="submit">Register</button>
+      <p>Already a user? Log in  <a href="/users/login" class="red">Here</a></p>
     </form>
+  </div>
+  <div class="graphical">
+    <img class="logo-large" src="https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/kades-branch/docs/maps_icon.png?raw=true" alt="logo">
+   <p class="caption">Create and explore user made maps!</p>
+ </div>
   </main>
 </body>
 </html>
