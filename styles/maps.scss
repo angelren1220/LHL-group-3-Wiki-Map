@@ -1,6 +1,8 @@
 #map {
   height: 40em;
-  width: 100%;
+  width: 90%;
+  border-radius: 10px;
+  border: solid #136F63 5px;
 }
 
 .pin-info {
@@ -21,4 +23,19 @@
   margin-left: 2%;
   margin-bottom: 3%;
   align-self: flex-end;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fff5d8;
+  background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
+}
+
+.page-header{
+color: #136F63;
+font-size: 50px;
 }
