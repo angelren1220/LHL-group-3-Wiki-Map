@@ -5,12 +5,12 @@ const userQueries = require('../db/queries/users');
 const router = express.Router();
 
 // get methods
-router.get('/', (req, res) => {
+router.get('/list', (req, res) => {
   mapsQueries.getMaps().then((data) => {
     const userEmail = req.session.user_email;
     const user = userQueries.getUserWithEmail(userEmail);
-    const templateVars = { mapURLs: data, user };
-    return res.render('maps_index', templateVars);
+    const templateVars = { mapData: data, user };
+    return res.render('maps_list', templateVars);
   });
 });
 

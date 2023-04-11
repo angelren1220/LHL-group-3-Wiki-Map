@@ -1,7 +1,7 @@
 const db = require('../connection');
 
 const getMaps = () => {
-  return db.query('SELECT url FROM maps;')
+  return db.query('SELECT * FROM maps;')
   .then(data => {
     return data.rows;
   })
