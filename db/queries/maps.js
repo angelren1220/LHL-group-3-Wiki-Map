@@ -39,6 +39,23 @@ const getAvgLatLng = (mapId) => {
     .catch(err => console.log(err.message));
 };
 
+const getMapIdWithUserEmail = (email) => {
+  return db.
+  query(
+    `SELECT maps.id FROM maps
+    JOIN users ON user_id = users.id
+    WHERE users.email = $1;`,
+    [email])
+  .then(data => {
+    return data.rows;
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+}
+
 
 module.exports = {
   getMaps,
