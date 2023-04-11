@@ -7,6 +7,7 @@ body{
 main{
   display:flex;
   flex-direction: row;
+  margin-top: 100px;
   color: #136F63;
   height: 1000px
 }
@@ -24,6 +25,7 @@ h3{
   font-size: 60px;
   font-family: sans-serif;
   margin-bottom: 20px;
+  margin-top: 0%;
 }
 
 input{
@@ -63,7 +65,7 @@ height: 30px
   flex-direction: column;
   align-items: center;
   background-color: #136F63;
-  box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 0px 5px 5px 14px rgba(0,0,0,0);
+  max-height: 700px;
   width:50%;
 }
 
