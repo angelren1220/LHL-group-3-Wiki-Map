@@ -1,6 +1,5 @@
 // Initialize and add the map
 let map;
-let markers = [];
 
 //test data
 const pinData = [
@@ -10,8 +9,16 @@ const pinData = [
       lng: 131.031
     },
     map: map,
-    title: "A",
-    description: "aaaaaa",
+    title: "Uluru National Park",
+    description: `Rising dramatically from the Central Australian desert, the huge red rock of Uluru is one of Australia’s most iconic attractions.
+
+    Formerly known as Ayers Rock, Uluru is made of sandstone about half a billion years old. It stands 348 metres high and has a circumference of 9.4 km.
+
+    Uluru is at its most stunning around sunrise and sunset, when the golden light makes the rock’s colours come alive.
+
+    For the Anangu people, Uluru is inseparable from Tjukurpa, or traditional law. The actions of the creation ancestors are still visible around the rock, and their stories are passed on from generation to generation, just as they have been for thousands of years.
+
+    Uluru is a spectacular panorama, but it’s real beauty can be found by looking closer. This ancient monolith is home to rare plants and animals, important spiritual sites and caves painted with remarkable rock art.`,
     img: "https://d3hne3c382ip58.cloudfront.net/files/uploads/bookmundi/resized/cmsfeatured/uluru-rock-1511763600-785X440.jpg"
   },
   {
@@ -30,25 +37,31 @@ const pinData = [
       lng: 140.031
     },
     map: map,
-    title: "C",
-    description: "cccccc"
+    // title: "C",
+    // description: "cccccc"
   }
 ];
 
-const contentString = function(pin) {
-  let outputBuffer = "";
-  if (pin.title) {
-    outputBuffer += `<h1> ${pin.title} </h1>`;
-  };
-  if (pin.description) {
-    outputBuffer += `<p> ${pin.description}</p>`;
-  };
-  if (pin.img) {
-    outputBuffer += `<img src=${pin.img}>`;
+const contentString = (pin) => {
+
+  if (!pin.title && !pin.description && !pin.img) {
+    return `<p> Anonymous Pin <p>`;
   }
-  if (!outputBuffer) {
-    outputBuffer = `<h1> Anonymous Pin <h1>`;
-  }
+
+  let outputBuffer = `<div class="pin-info"><div class="pin-text">`;
+
+    if (pin.title) {
+      outputBuffer += `<h1 class="pin-title"> ${pin.title} </h1>`;
+    };
+    if (pin.description) {
+      outputBuffer += `<p class="pin-description"> ${pin.description}</p>`;
+    };
+  outputBuffer += "</div>"
+
+    if (pin.img) {
+      outputBuffer += `<img class="pin-img" src=${pin.img}>`;
+    }
+  outputBuffer += "</div>"
   return outputBuffer;
 };
 
