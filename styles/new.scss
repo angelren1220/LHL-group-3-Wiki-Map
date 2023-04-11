@@ -1,0 +1,115 @@
+body{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff5d8;
+  background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
+}
+main{
+  display:flex;
+  flex-direction: row;
+  margin-top: 100px;
+  color: #136F63;
+  height: 1000px
+}
+.functional{
+display:flex;
+flex-direction: column;
+align-items: left;
+padding-left: 30px;
+width: 75%;
+}
+
+
+h3{
+  display: flex;
+  font-size: 60px;
+  font-family: sans-serif;
+  margin-bottom: 20px;
+  margin-top: 0%;
+}
+
+input{
+  display:flex;
+  border: 3px solid #136F63;
+  border-radius: 15px;
+  padding-bottom: 10px;
+  width: 25%;
+  min-width: 160px;
+  background-color: beige;
+  line-height: 15px;
+}
+
+form{
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+
+.form-element{
+padding-bottom: 20px;
+}
+
+
+
+button{
+background-color: #136F63;
+border-radius: 15px;
+border: 3px solid #136F63;
+width: 25%;
+height: 30px
+
+}
+
+.graphical{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #136F63;
+  max-height: 700px;
+  width:50%;
+}
+
+.caption{
+  display: flex;
+  justify-content: center;
+  padding-left: 10px;
+  text-align: center;
+  font-size: 30px;
+  font-family: sans-serif;
+  opacity: 1;
+  color: white;
+}
+
+.logo-large{
+  display:flex;
+  padding-top: 20px;
+  width: 80%;
+}
+p{
+  font-size: 20px;
+  font-family: sans-serif;
+}
+.red{
+color:red;
+font-size: 20px;
+}
+
+input::placeholder {
+  color: #999; /* set the color of the placeholder text */
+  font-style: italic; /* set the style of the placeholder text */
+  font-size: 15px;
+  vertical-align: middle;
+
+}
+
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+  .graphical {
+    width: 100%;
+  }
+  form{
+    padding-bottom: 10px;
+  }
+}
