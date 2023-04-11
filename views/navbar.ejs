@@ -1,19 +1,33 @@
 <header>
-<link rel="stylesheet" href="/styles/navbar.css" />
+  <link rel="stylesheet" href="/styles/navbar.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <nav>
-      <div class ="nav_links">
-        <img class="logo" src="https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/kades-branch/docs/maps_icon.png?raw=true" alt="logo">
+    <div class ="nav_links">
+      <img class="logo" src="https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/kades-branch/docs/maps_icon.png?raw=true" alt="logo">
       <% if (user) { %>
         <form action="/users/logout" method="POST" class="logout-button">
           <label for="email">Hello!</label>
-            <button type="submit">Logout</button>
+          <button type="submit">Logout</button>
         </form>
         <a href="/maps/new">New Map</a>
-      <% } else { %>
-        <a href="/users/login">Login</a>
-        <a href="/users/register">Register</a>
-      <% } %>
-      <a href="/maps">Maps</a>
-      </div>
+        <% } else { %>
+          <a href="/users/login">Login</a>
+          <a href="/users/register">Register</a>
+          <% } %>
+          <a href="/maps/list">Maps List</a>
+          <a href="/">Home</a>
+    </div>
+    <script>
+$(document).ready(function() {
+  $('a').mouseover(function() {
+    const anchor = $(this);
+    anchor.addClass('hover');
+  });
+  $('a').mouseout(function() {
+    const anchor = $(this);
+    anchor.removeClass('hover');
+  });
+});
+    </script>
   </nav>
 </header>

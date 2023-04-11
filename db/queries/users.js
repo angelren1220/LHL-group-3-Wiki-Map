@@ -1,6 +1,10 @@
 const db = require('../connection');
 
 const getUserWithEmail = (email) => {
+  if (!email) {
+    return null;
+  }
+
   return db.
   query(
     `SELECT * FROM users WHERE users.email = $1`,
