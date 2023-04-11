@@ -1,46 +1,11 @@
-// Initialize and add the map
 let map;
 
 //test data
-const pinData = [
-  {
-    position: {
-      lat: -25.344,
-      lng: 131.031
-    },
-    map: map,
-    title: "Uluru National Park",
-    description: `Rising dramatically from the Central Australian desert, the huge red rock of Uluru is one of Australia’s most iconic attractions.
 
-    Formerly known as Ayers Rock, Uluru is made of sandstone about half a billion years old. It stands 348 metres high and has a circumference of 9.4 km.
-
-    Uluru is at its most stunning around sunrise and sunset, when the golden light makes the rock’s colours come alive.
-
-    For the Anangu people, Uluru is inseparable from Tjukurpa, or traditional law. The actions of the creation ancestors are still visible around the rock, and their stories are passed on from generation to generation, just as they have been for thousands of years.
-
-    Uluru is a spectacular panorama, but it’s real beauty can be found by looking closer. This ancient monolith is home to rare plants and animals, important spiritual sites and caves painted with remarkable rock art.`,
-    img: "https://d3hne3c382ip58.cloudfront.net/files/uploads/bookmundi/resized/cmsfeatured/uluru-rock-1511763600-785X440.jpg"
-  },
-  {
-    position: {
-      lat: -20.344,
-      lng: 120.031
-    }
-    ,
-    map: map,
-    title: "B",
-    description: "bbbbbb"
-  },
-  {
-    position: {
-      lat: -35.344,
-      lng: 140.031
-    },
-    map: map,
-    // title: "C",
-    // description: "cccccc"
-  }
-];
+const pinData = $.ajax({
+  method: 'GET',
+  url: '/pins'
+})
 
 const contentString = (pin) => {
 
@@ -68,7 +33,7 @@ const contentString = (pin) => {
 async function initMap() {
   // The location of Uluru
   const position1 = { lat: -25.344, lng: 131.031 };
-  const position2 = { lat: -23.344, lng: 120.031 };
+
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
