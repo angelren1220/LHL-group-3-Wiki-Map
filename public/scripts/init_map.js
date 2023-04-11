@@ -42,6 +42,7 @@ const pinData = [
   }
 ];
 
+//html for pin info window
 const contentString = (pin) => {
 
   if (!pin.title && !pin.description && !pin.img) {
@@ -65,6 +66,7 @@ const contentString = (pin) => {
   return outputBuffer;
 };
 
+//create a map and load pins - load info windows and event listeners for each pin
 async function initMap() {
   // The location of Uluru
   const position1 = { lat: -25.344, lng: 131.031 };
@@ -89,7 +91,7 @@ async function initMap() {
   for (let i = 0; i < pinData.length; i++) {
     const infowindow = new google.maps.InfoWindow({
       content: contentString(pinData[i]),
-      ariaLabel: pinData[i].title,
+      ariaLabel: pinData[i].title || "anon",
     });
 
     const marker = new google.maps.Marker({
