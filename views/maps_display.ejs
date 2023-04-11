@@ -2,28 +2,42 @@
 <html lang="en">
 
 <head>
-  <title>Wiki Map Home Page</title>
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+<<<<<<< HEAD:views/maps_test.ejs
+  <link rel="stylesheet" href="/styles/maps.css" />
 
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
+  <script type="module" defer src="/scripts/init_maps.js"></script>
+  <title>New Map</title>
+=======
+
+
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js" integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
 
   <!-- for the map -->
   <link rel="stylesheet" href="/styles/maps.css" />
-  <script type="module" defer src="/scripts/init_map.js"></script>
-</head>
-<%- include('navbar') %>
+  <script type="module" src="/scripts/init_map.js"></script>
 
-  <body>
-    <h1>Welcome to InsertNameHere!</h1>
+  <title>A Map</title>
+>>>>>>> a63dfea35b11ee3cd0cf83dc2381f0f7e2022b00:views/maps_display.ejs
+</head>
+
+
+<body>
+
+  <h1>Map Title</h1>
 
   <!--The div element for the map -->
   <div id="map"></div>
@@ -32,11 +46,15 @@
 
   <script>
     (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a); })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)); })({
-      key: "AIzaSyCe2SJLUuOdxj0eJH2WvepD-CX48PTX7Lo", v: "weekly"
+      key: "AIzaSyCe2SJLUuOdxj0eJH2WvepD-CX48PTX7Lo",
       // Add other bootstrap parameters as needed, using camel case.
       // Use the 'v' parameter to indicate the version to load (alpha, beta, weekly, etc.)
     });
   </script>
-  </body>
 
+
+
+
+
+</body>
 </html>
