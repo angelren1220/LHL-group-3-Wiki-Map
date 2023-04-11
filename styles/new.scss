@@ -7,6 +7,7 @@ body{
 main{
   display:flex;
   flex-direction: row;
+  margin-top: 100px;
   color: #136F63;
   height: 1000px
 }
@@ -24,6 +25,7 @@ h3{
   font-size: 60px;
   font-family: sans-serif;
   margin-bottom: 20px;
+  margin-top: 0%;
 }
 
 input{
@@ -43,13 +45,11 @@ flex-direction: column;
 width: 100%;
 }
 
-.email{
+.form-element{
 padding-bottom: 20px;
 }
 
-.password{
-padding-bottom: 20px;
-}
+
 
 button{
 background-color: #136F63;
@@ -57,6 +57,7 @@ border-radius: 15px;
 border: 3px solid #136F63;
 width: 25%;
 height: 30px
+
 }
 
 .graphical{
@@ -64,14 +65,16 @@ height: 30px
   flex-direction: column;
   align-items: center;
   background-color: #136F63;
-  box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 0px 5px 5px 14px rgba(0,0,0,0);
+  max-height: 700px;
   width:50%;
 }
 
-.y{
+.caption{
   display: flex;
   justify-content: center;
-  font-size: 40px;
+  padding-left: 10px;
+  text-align: center;
+  font-size: 30px;
   font-family: sans-serif;
   opacity: 1;
   color: white;
@@ -105,5 +108,8 @@ input::placeholder {
   }
   .graphical {
     width: 100%;
+  }
+  form{
+    padding-bottom: 10px;
   }
 }
