@@ -39,13 +39,12 @@ img.logo {
   width: 70px;
 }
 
-.hover {
-  color: #d6a05e;
-}
 
 .logout-button{
+  display:flex;
+  flex-direction: row;
   background-color: #136F63;
-  border: solid white 3px;
+
   border-radius: 10px;
   color: white;
   font-family: sans-serif;
@@ -57,4 +56,14 @@ label{
   font-family: sans-serif;
   font-size: 25px;
   padding-right: 10px;
+}
+
+.logout{
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+.hover {
+  color: #d6a05e;
 }
