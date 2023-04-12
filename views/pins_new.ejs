@@ -10,54 +10,30 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
-  <link rel="stylesheet" href="/styles/maps_list.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
 
-  <!-- <script type="module" defer src="/scripts/new_map.js"></script> -->
 </head>
 <%- include('navbar') %>
 <body>
-  <!-- form for map creation -->
-  <div class="map-form">
-  <h3>Add a new map</h3>
-  <form action="/maps/new" method="POST">
-    <div class="add-map">
-      <label>Map Name</label>
-      <input
-        type="text"
-        name="name"
-        placeholder="map name"
-      />
-    </div>
-    <div class="add-map">
-      <label>Map Zoom</label>
+  <!-- pins -->
+  <div class="pin-form">
+  <h3>Add a new pin</h3>
+  <form action="/maps/pins/new" method="POST">
+    <div class="add-pin">
+      <label>Map Id</label>
       <input
         type="number"
-        name="zoom"
-        placeholder="8"
-      />
-    </div>
-    <button type="submit" class="submit">Add</button>
-  </form>
-  </div>
-  <!-- pins -->
-  <!-- <div class="pin-form">
-  <h3>Add a new pin</h3>
-  <form action="/api/new_pin" method="POST">
-    <div class="add-pin">
-      <label>Map Name</label>
-      <input
-        type="text"
-        name="name"
-        placeholder="map name"
+        name="map_id"
+        placeholder="map id"
       />
     </div>
     <div class="add-pin">
       <label>Latitude</label>
       <input
         type="number"
-        name="latitude"
+        name="lat"
+        step=".01"
         placeholder="233.33"
       />
     </div>
@@ -65,7 +41,8 @@
       <label>Longitude</label>
       <input
         type="number"
-        name="longitude"
+        name="lng"
+        step=".01"
         placeholder="233.33"
       />
     </div>
@@ -73,7 +50,7 @@
       <label>Pin Name</label>
       <input
         type="text"
-        name="pin_name"
+        name="name"
         placeholder="pin name"
       />
     </div>
@@ -82,15 +59,15 @@
       <textarea placeholder="Description" name="description" cols="30" rows="10"></textarea>
     </div>
     <div class="add-pin">
-      <label>Photo URL</label>
+      <label>Image URL</label>
       <input
         type="text"
-        name="img_url"
+        name="image_url"
         placeholder="http://"
       />
     </div>
     <button type="submit" class="submit">Add</button>
   </form>
-  </div> -->
+  </div>
 </body>
 </html>

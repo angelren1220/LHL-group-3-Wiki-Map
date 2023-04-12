@@ -1,15 +1,15 @@
 const db = require('../connection');
 
 const getMaps = () => {
-  return db.query('SELECT url FROM maps;')
-    .then(data => {
-      return data.rows;
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+  return db.query('SELECT * FROM maps;')
+  .then(data => {
+    return data.rows;
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
 };
 
 const getPinsByMapId = (mapId) => {
@@ -17,7 +17,7 @@ const getPinsByMapId = (mapId) => {
     `SELECT *
     FROM pins
     WHERE map_id = $1;`,
-    [mapId]
+    [Number(mapId)]
   )
     .then((data) => {
       return data.rows;
@@ -39,7 +39,7 @@ const getAvgLatLng = (mapId) => {
     .catch(err => console.log(err.message));
 };
 
-const getMapName = (mapId) => {
+const getMapObj = (mapId) => {
   return db.query(
     `SELECT *
     FROM maps
@@ -52,12 +52,46 @@ const getMapName = (mapId) => {
     .catch(err => console.log(err.message));
 };
 
+const getMapsWithUserEmail = (email) => {
+  return db.
+  query(
+    `SELECT maps.id AS id, maps.zoom AS zoom, maps.name AS name FROM maps
+    JOIN users ON user_id = users.id
+    WHERE users.email = $1;`,
+    [email])
+  .then(data => {
+    return data.rows;
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+};
+
+const addMap = (map) => {
+  return db.
+  query(
+    `INSERT INTO maps (user_id, name, zoom)
+     VALUES ($1, $2, $3)
+     RETURNING *;`,
+    [map.user_id, map.name, map.zoom])
+  .then(() => {
+    return "Add new map successfully";
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+};
+
 
 module.exports = {
   getMaps,
   getPinsByMapId,
   getAvgLatLng,
-  getMapName,
+  getMapObj,
+  getMapsWithUserEmail,
+  addMap
 };
 
 

@@ -12,6 +12,12 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+<<<<<<< HEAD:views/maps_test.ejs
+  <link rel="stylesheet" href="/styles/maps.css" />
+
+  <script type="module" defer src="/scripts/init_maps.js"></script>
+  <title>New Map</title>
+=======
 
 
   <!-- External JS -->
@@ -24,7 +30,12 @@
   <link rel="stylesheet" href="/styles/maps.css" />
   <script type="module" src="/scripts/init_map.js"></script>
 
+<<<<<<< HEAD
   <title><%= name %></title>
+=======
+  <title>A Map</title>
+>>>>>>> a63dfea35b11ee3cd0cf83dc2381f0f7e2022b00:views/maps_display.ejs
+>>>>>>> affba6853f028491580e815ff36eecb950630d67
 </head>
 
 <body>
@@ -37,7 +48,7 @@
 
   <script>
     (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a); })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)); })({
-      key: "AIzaSyCe2SJLUuOdxj0eJH2WvepD-CX48PTX7Lo", v: "weekly"
+      key: "AIzaSyCe2SJLUuOdxj0eJH2WvepD-CX48PTX7Lo",
       // Add other bootstrap parameters as needed, using camel case.
       // Use the 'v' parameter to indicate the version to load (alpha, beta, weekly, etc.)
     });
