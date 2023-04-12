@@ -55,7 +55,7 @@ const getMapObj = (mapId) => {
 const getMapsWithUserEmail = (email) => {
   return db.
   query(
-    `SELECT maps.id AS id, maps.zoom AS zoom, maps.name AS name FROM maps
+    `SELECT maps.id AS id, maps.name AS name FROM maps
     JOIN users ON user_id = users.id
     WHERE users.email = $1;`,
     [email])
@@ -72,10 +72,10 @@ const getMapsWithUserEmail = (email) => {
 const addMap = (map) => {
   return db.
   query(
-    `INSERT INTO maps (user_id, name, zoom)
-     VALUES ($1, $2, $3)
+    `INSERT INTO maps (user_id, name)
+     VALUES ($1, $2)
      RETURNING *;`,
-    [map.user_id, map.name, map.zoom])
+    [map.user_id, map.name])
   .then(() => {
     return "Add new map successfully";
   })
