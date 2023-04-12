@@ -55,7 +55,8 @@ const getUserIDWithEmail = (email) => {
 
   return db.
   query(
-    `SELECT id FROM users WHERE email = $1`,
+    `SELECT maps.id FROM maps
+    JOIN users ON user_id = users.id where users.email = $1`,
     [email.toLowerCase()]
   )
   .then((result) => {

@@ -17,7 +17,7 @@ const getPinsByMapId = (mapId) => {
     `SELECT *
     FROM pins
     WHERE map_id = $1;`,
-    [mapId]
+    [Number(mapId)]
   )
     .then((data) => {
       return data.rows;
@@ -39,10 +39,10 @@ const getAvgLatLng = (mapId) => {
     .catch(err => console.log(err.message));
 };
 
-const getMapIdWithUserEmail = (email) => {
+const getMapsWithUserEmail = (email) => {
   return db.
   query(
-    `SELECT maps.id FROM maps
+    `SELECT maps.id AS id, maps.zoom AS zoom, maps.name AS name FROM maps
     JOIN users ON user_id = users.id
     WHERE users.email = $1;`,
     [email])
@@ -61,6 +61,7 @@ module.exports = {
   getMaps,
   getPinsByMapId,
   getAvgLatLng,
+  getMapsWithUserEmail
 };
 
 
