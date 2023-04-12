@@ -5,12 +5,93 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>New Map</title>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/maps_list.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+
+  <link rel="stylesheet" href="/styles/maps.css" />
+  <!-- <script type="module" defer src="/scripts/new_map.js"></script> -->
 </head>
 <%- include('navbar') %>
 <body>
-  <h1>New Map</h1>
-
-  <!-- form for map creation and initial pins -->
-
+  <!-- form for map creation -->
+  <div class="map-form">
+  <h3>Add a new map</h3>
+  <form action="/api/new_map" method="POST">
+    <div class="add-map">
+      <label>Map Name</label>
+      <input
+        type="text"
+        name="map_name"
+        placeholder="map name"
+      />
+    </div>
+    <div class="add-map">
+      <label>Map Zoom</label>
+      <input
+        type="number"
+        name="zoom"
+        placeholder="8"
+      />
+    </div>
+    <button type="submit" class="submit">Add</button>
+  </form>
+  </div>
+  <!-- pins -->
+  <div class="pin-form">
+  <h3>Add a new pin</h3>
+  <form action="/api/new_pin" method="POST">
+    <div class="add-pin">
+      <label>Map Name</label>
+      <input
+        type="text"
+        name="map_name"
+        placeholder="map name"
+      />
+    </div>
+    <div class="add-pin">
+      <label>Latitude</label>
+      <input
+        type="number"
+        name="latitude"
+        placeholder="233.33"
+      />
+    </div>
+    <div class="add-pin">
+      <label>Longitude</label>
+      <input
+        type="number"
+        name="longitude"
+        placeholder="233.33"
+      />
+    </div>
+    <div class="add-pin">
+      <label>Pin Name</label>
+      <input
+        type="text"
+        name="pin_name"
+        placeholder="pin name"
+      />
+    </div>
+    <div class="add-pin">
+      <label>Description</label>
+      <textarea placeholder="Description" name="description" cols="30" rows="10"></textarea>
+    </div>
+    <div class="add-pin">
+      <label>Photo URL</label>
+      <input
+        type="text"
+        name="img_url"
+        placeholder="http://"
+      />
+    </div>
+    <button type="submit" class="submit">Add</button>
+  </form>
+  </div>
 </body>
 </html>
