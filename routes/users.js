@@ -63,6 +63,20 @@ router.get('/', (req, res) => {
   res.render('users', templateVars);
 });
 
+router.get('/', (req, res) => {
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
+  const templateVars = { user };
+  res.render('users', templateVars);
+});
+
+router.get('/verify', (req, res) => {
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
+  const templateVars = { user };
+  res.json(templateVars);
+});
+
 router.get('/login', (req, res) => {
   const userEmail = req.session.user_email;
   const user = userQueries.getUserWithEmail(userEmail);
