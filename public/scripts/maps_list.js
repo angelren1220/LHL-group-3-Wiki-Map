@@ -8,7 +8,7 @@ $(() => {
       $mapsList.empty();
 
       for (const map of data) {
-        $(`<a>`).text(`id: ${map.id}, zoom; ${map.zoom}, name: ${map.name}`).attr("href", `/maps/${map.id}`).addClass('black').appendTo($mapsList);
+        $(`<a>`).text(`id: ${map.id}, name: ${map.name}`).attr("href", `/maps/${map.id}`).addClass('black').appendTo($mapsList);
       }
     })
     .catch((err) => {
