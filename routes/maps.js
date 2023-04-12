@@ -80,7 +80,7 @@ router.get('/:id', (req, res) => {
 // post method
 router.post("/new", (req, res) => {
   let map = req.body;
-  pin.user_id = 1;
+  map.user_id = 1;
 
   //console.log(map);
   mapsQueries
