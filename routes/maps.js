@@ -58,7 +58,7 @@ router.get('/api/new', (req, res) => {
 });
 
 router.get('/test', (req, res) => {
-  res.render('maps_display');
+  res.render('maps_display', templateVars);
 });
 
 router.get('/pins/:id', (req, res) => {
@@ -70,9 +70,11 @@ router.get('/pins/:id', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  const mapId = req.params.id
+  const mapId = req.params.id;
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
   mapsQueries.getMapObj(mapId).then((data) => {
-    const templateVars =  data ;
+    const templateVars =  { data, user} ;
     // console.log('💫',templateVars)
     res.render('maps_display', templateVars);
   }).catch((err) => { '🐠', err; });
