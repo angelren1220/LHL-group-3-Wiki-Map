@@ -73,7 +73,6 @@ router.get('/:id', (req, res) => {
   const mapId = req.params.id
   mapsQueries.getMapObj(mapId).then((data) => {
     const templateVars =  data ;
-    // console.log('💫',templateVars)
     res.render('maps_display', templateVars);
   }).catch((err) => { '🐠', err; });
 });
