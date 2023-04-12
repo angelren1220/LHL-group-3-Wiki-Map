@@ -79,13 +79,10 @@ router.get('/:id', (req, res) => {
 
 // post method
 router.post("/new", (req, res) => {
-  const map = {
-    user_id: 1,
-    name: req.body.map_name,
-    zoom: req.body.zoom
-  };
+  let map = req.body;
+  pin.user_id = 1;
 
-  console.log(map);
+  //console.log(map);
   mapsQueries
     .addMap(map)
     .then((map) => {
@@ -93,6 +90,21 @@ router.post("/new", (req, res) => {
         return res.send({ error: "error" });
       }
       res.redirect("list");
+    })
+    .catch((err) => res.send(err));
+});
+
+router.post("/pins/new", (req, res) => {
+  let pin = req.body;
+  pin.user_id = 1;
+  console.log(pin);
+  pinsQueries
+    .addPin(pin)
+    .then((pin) => {
+      if (!pin) {
+        return res.send({ error: "error" });
+      }
+      res.redirect("/maps/list");
     })
     .catch((err) => res.send(err));
 });

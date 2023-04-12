@@ -19,20 +19,21 @@
   <!-- pins -->
   <div class="pin-form">
   <h3>Add a new pin</h3>
-  <form action="/pins/new" method="POST">
+  <form action="/maps/pins/new" method="POST">
     <div class="add-pin">
-      <label>Map Name</label>
+      <label>Map Id</label>
       <input
-        type="text"
-        name="name"
-        placeholder="map name"
+        type="number"
+        name="map_id"
+        placeholder="map id"
       />
     </div>
     <div class="add-pin">
       <label>Latitude</label>
       <input
         type="number"
-        name="latitude"
+        name="lat"
+        step=".01"
         placeholder="233.33"
       />
     </div>
@@ -40,7 +41,8 @@
       <label>Longitude</label>
       <input
         type="number"
-        name="longitude"
+        name="lng"
+        step=".01"
         placeholder="233.33"
       />
     </div>
@@ -48,7 +50,7 @@
       <label>Pin Name</label>
       <input
         type="text"
-        name="pin_name"
+        name="name"
         placeholder="pin name"
       />
     </div>
@@ -57,10 +59,10 @@
       <textarea placeholder="Description" name="description" cols="30" rows="10"></textarea>
     </div>
     <div class="add-pin">
-      <label>Photo URL</label>
+      <label>Image URL</label>
       <input
         type="text"
-        name="img_url"
+        name="image_url"
         placeholder="http://"
       />
     </div>
