@@ -54,14 +54,30 @@ const getMapsWithUserEmail = (email) => {
       .status(500)
       .json({ error: err.message });
   });
-}
+};
+
+const addMap = (map) => {
+  return db.
+  query(
+    `INSERT INTO maps (user_id, name, zoom)
+     VALUES ($1, $2, $3)
+     RETURNING *;`,
+    [map.user_id, map.name, map.zoom])
+  .then(() => {
+    return "Add new map successfully";
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+};
 
 
 module.exports = {
   getMaps,
   getPinsByMapId,
   getAvgLatLng,
-  getMapsWithUserEmail
+  getMapsWithUserEmail,
+  addMap
 };
 
 
