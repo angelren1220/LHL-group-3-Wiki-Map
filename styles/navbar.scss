@@ -10,7 +10,7 @@ nav{
   left: 0;
   width: 100vw;
   height: 100px;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: row;
   background-color: #136F63;
   z-index: 1;
@@ -18,11 +18,10 @@ nav{
 
 .nav_links{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding: 1% 6% 0% 6%;
 }
 
 
