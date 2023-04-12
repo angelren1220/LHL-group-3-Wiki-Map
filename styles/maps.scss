@@ -28,9 +28,10 @@
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
+  padding-top: 110px ;
   background-color: #fff5d8;
   background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
 }
@@ -38,4 +39,78 @@ body {
 .page-header{
 color: #136F63;
 font-size: 50px;
+}
+
+h1{
+  color: #136F63;
+  display: flex;
+  font-size: 60px;
+  font-family: sans-serif;
+  margin-bottom: 20px;
+  margin-top: 0%;
+}
+
+.map-form{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-map{
+  display:flex;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.submit{
+  background-color: #136F63;
+  color: white;
+  font-family: sans-serif;
+  font-size: 20px;
+  width: 15%;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+}
+
+input{
+  border: 3px solid #136F63;
+  border-radius: 15px;
+  padding-bottom: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 7px;
+  width: 40%;
+  min-width: 160px;
+  background-color: beige;
+  line-height: 15px;
+}
+
+.form-label{
+  font-size: 30px;
+  color:#136F63;
+}
+
+@media (max-width: 768px) {
+  .add-map{
+    flex-direction: column;
+  }
+  .submit{
+    background-color: #136F63;
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+    min-width: 30%;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+  }
 }
