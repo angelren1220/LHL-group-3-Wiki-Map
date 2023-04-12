@@ -1,52 +1,12 @@
-//test data
-// const pinData = [
-//   {
-//     position: {
-//       lat: -25.344,
-//       lng: 131.031
-//     },
-//     map: map,
-//     title: "Uluru National Park",
-//     description: `Rising dramatically from the Central Australian desert, the huge red rock of Uluru is one of Australia’s most iconic attractions.
-
-//     Formerly known as Ayers Rock, Uluru is made of sandstone about half a billion years old. It stands 348 metres high and has a circumference of 9.4 km.
-
-//     Uluru is at its most stunning around sunrise and sunset, when the golden light makes the rock’s colours come alive.
-
-//     For the Anangu people, Uluru is inseparable from Tjukurpa, or traditional law. The actions of the creation ancestors are still visible around the rock, and their stories are passed on from generation to generation, just as they have been for thousands of years.
-
-//     Uluru is a spectacular panorama, but it’s real beauty can be found by looking closer. This ancient monolith is home to rare plants and animals, important spiritual sites and caves painted with remarkable rock art.`,
-//     img: "https://d3hne3c382ip58.cloudfront.net/files/uploads/bookmundi/resized/cmsfeatured/uluru-rock-1511763600-785X440.jpg"
-//   },
-//   {
-//     position: {
-//       lat: -20.344,
-//       lng: 120.031
-//     }
-//     ,
-//     map: map,
-//     title: "B",
-//     description: "bbbbbb"
-//   },
-//   {
-//     position: {
-//       lat: -35.344,
-//       lng: 140.031
-//     },
-//     map: map,
-//     // title: "C",
-//     // description: "cccccc"
-//   }
-// ];
-
 // Initialize and add the map
 let map;
+let markers = [];
 
 //calculate average pin location
 const avgPinLocation = (pinData) => {
   let totalLat = 0;
   let totalLng = 0;
-  for (let i = 0;i < pinData.length; i++) {
+  for (let i = 0; i < pinData.length; i++) {
     totalLat += pinData[i].lat;
     totalLng += pinData[i].lng;
   };
@@ -79,9 +39,47 @@ const contentString = (pin) => {
   return outputBuffer;
 };
 
-async function initMap(mapPinData, avgPinLocation) {
-  // The location of Uluru National Park in Australia
-  // const position1 = { lat: -25.344, lng: 131.031 };
+//use range of pin position values to calculate map zoom level
+const calcZoomFactor = (pinData) => {
+  let minLat = pinData[0].lat;
+  let maxLat = pinData[0].lat;
+  let minLng = pinData[0].lng;
+  let maxLng = pinData[0].lng;
+
+  for (let i = 1; i < pinData.length; i++) {
+    if (pinData[i].lat > maxLat) {
+      maxLat = pinData[i].lat;
+    }
+    if (pinData[i].lat < minLat) {
+      minLat = pinData[i].lat;
+    }
+    if (pinData[i].lng > maxLng) {
+      maxLng = pinData[i].lng;
+    }
+    if (pinData[i].lng < minLng) {
+      minLng = pinData[i].lng;
+    }
+  };
+
+  let latRange = maxLat-minLat;
+  if (latRange > 180) {
+    latRange = 180 - (latRange - 180);
+  };
+  const lngRange = maxLng-minLng;
+
+  const largestRange = Math.sqrt(Math.pow(latRange, 2) + Math.pow(lngRange, 2))
+
+  console.log('🍄',largestRange);
+  const zoomLevel = 9 * (Math.exp(-0.1 * largestRange));
+  console.log('🔥', zoomLevel)
+  if (zoomLevel < 1.8) {
+    return 1.8;
+  };
+  return zoomLevel;
+};
+
+//adds pin and map objects to the map div in the linking HTML page
+async function initMap(mapPinData, avgPinLocation, zoom) {
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
@@ -90,14 +88,14 @@ async function initMap(mapPinData, avgPinLocation) {
 
   // mapId in Map refers to a style sheet provided by google
   map = new Map(document.getElementById("map"), {
-    zoom: 3,
+    zoom: zoom,
     center: avgPinLocation,
-    mapId: "DEMO_MAP_ID",
+    mapId: "a73be9ed69e46d38",
     streetViewControl: false,
   });
 
 
-  // creates each marker on the map, and attaches infoWindow and event listeners to  the markers
+  // creates each marker on the map, and attaches infoWindow and event listeners to the markers
   for (let i = 0; i < mapPinData.length; i++) {
     const infowindow = new google.maps.InfoWindow({
       content: contentString(mapPinData[i]),
@@ -105,11 +103,13 @@ async function initMap(mapPinData, avgPinLocation) {
     });
 
     const marker = new google.maps.Marker({
-      position: {lat: mapPinData[i].lat, lng:  mapPinData[i].lng },
+      position: { lat: mapPinData[i].lat, lng: mapPinData[i].lng },
       map,
       title: mapPinData[i].name,
       label: String(i + 1),
     });
+
+    markers.push(marker);
 
     marker.addListener("click", () => {
       infowindow.open({
@@ -130,12 +130,13 @@ $(document).ready(function() {
   //get pin data from given map_id
   $.ajax({
     url: `/maps/pins/${myUrl}`,
-    success: function( data ) {
-      const pinData = data.templateVars
+    success: function(data) {
+      const pinData = data.templateVars;
       //create a map and load pins - load info windows and event listeners for each pin
       //pinData is an array of objects. Each pin object must have: lat and lng, and can optionally have: name, description, image_url
-      initMap(pinData, avgPinLocation(pinData));
+      initMap(pinData, avgPinLocation(pinData), calcZoomFactor(pinData));
     },
   });
+  console.log('🌈',markers);
 
 });

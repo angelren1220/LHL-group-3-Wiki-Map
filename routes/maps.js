@@ -35,8 +35,9 @@ router.get('/pins/:id', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const mapId = req.params.id
-  mapsQueries.getPinsByMapId(mapId).then((data) => {
-    const templateVars = data;
+  mapsQueries.getMapName(mapId).then((data) => {
+    const templateVars =  data ;
+    // console.log('💫',templateVars)
     res.render('maps_display', templateVars);
   }).catch((err) => {'🐠',err});
 });

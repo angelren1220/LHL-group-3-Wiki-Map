@@ -39,11 +39,25 @@ const getAvgLatLng = (mapId) => {
     .catch(err => console.log(err.message));
 };
 
+const getMapName = (mapId) => {
+  return db.query(
+    `SELECT *
+    FROM maps
+    WHERE id = $1;`,
+    [mapId]
+  )
+    .then((data) => {
+      return data.rows[0];
+    })
+    .catch(err => console.log(err.message));
+};
+
 
 module.exports = {
   getMaps,
   getPinsByMapId,
   getAvgLatLng,
+  getMapName,
 };
 
 
