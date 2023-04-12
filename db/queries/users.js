@@ -7,7 +7,7 @@ const getUserWithEmail = (email) => {
 
   return db.
   query(
-    `SELECT * FROM users WHERE users.email = $1`,
+    `SELECT * FROM users WHERE users.email = $1;`,
     [email.toLowerCase()])
   .then((result) => {
     return result.rows[0];
@@ -23,7 +23,7 @@ const addUser = (user) => {
     `INSERT INTO users (name, email, password)
      VALUES ($1, $2, $3)
      RETURNING *;`,
-    [user.name, user.email, user.password])
+    [user.name, user.email.toLowerCase(), user.password])
   .then(() => {
     return "Add new user successfully";
   })
@@ -38,8 +38,27 @@ const getUserWithId = (id) => {
   }
   return db.
   query(
-    `SELECT * FROM users WHERE users.id = $1`,
+    `SELECT * FROM users WHERE users.id = $1;`,
     [Number(id)])
+  .then((result) => {
+    return result.rows[0];
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+};
+
+const getUserIDWithEmail = (email) => {
+  if(!email) {
+    return null;
+  }
+
+  return db.
+  query(
+    `SELECT maps.id FROM maps
+    JOIN users ON user_id = users.id where users.email = $1`,
+    [email.toLowerCase()]
+  )
   .then((result) => {
     return result.rows[0];
   })
@@ -51,5 +70,6 @@ const getUserWithId = (id) => {
 module.exports = {
   getUserWithEmail,
   addUser,
-  getUserWithId
+  getUserWithId,
+  getUserIDWithEmail
 };
