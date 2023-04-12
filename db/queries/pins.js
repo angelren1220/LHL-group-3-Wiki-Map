@@ -28,13 +28,13 @@ const getPinsWithUserId = (id) => {
     });
 };
 
-const addPins = (pin) => {
+const addPin = (pin) => {
   return db.
     query(
-      `INSERT INTO pins (user_id, map_id, lag, lng, name, description, img_url)
+      `INSERT INTO pins (user_id, map_id, lat, lng, name, description, image_url)
      VALUES ($1, $2, $3, $4, $5, $6, $7)
      RETURNING *;`,
-      [Number(pin.user_id), Number(pin.map_id), Number(pin.lag), Number(pin.lng), pin.name, pin.description, pin.img_url])
+      [Number(pin.user_id), Number(pin.map_id), Number(pin.lat), Number(pin.lng), pin.name, pin.description, pin.image_url])
     .then(() => {
       return "Add new pin successfully";
     })
@@ -46,5 +46,5 @@ const addPins = (pin) => {
 module.exports = {
   getPins,
   getPinsWithUserId,
-  addPins
+  addPin
 };
