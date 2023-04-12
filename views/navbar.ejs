@@ -7,7 +7,7 @@
       <% if (user) { %>
         <form action="/users/logout" method="POST" class="logout-button">
           <label for="email">Hello!</label>
-          <button type="submit">Logout</button>
+          <button type="submit" class="logout">Logout</button>
         </form>
         <a href="/maps/new">New Map</a>
         <a href="/maps/pins/new">New Pin</a>
@@ -19,13 +19,13 @@
     </div>
     <script>
 $(document).ready(function() {
-  $('a').mouseover(function() {
-    const anchor = $(this);
-    anchor.addClass('hover');
+  $('a, button').mouseover(function() {
+    const element = $(this);
+    element.addClass('hover');
   });
-  $('a').mouseout(function() {
-    const anchor = $(this);
-    anchor.removeClass('hover');
+  $('a, button').mouseout(function() {
+    const element = $(this);
+    element.removeClass('hover');
   });
 });
     </script>
