@@ -70,7 +70,7 @@ const calcZoomFactor = (pinData) => {
   const largestRange = Math.sqrt(Math.pow(latRange, 2) + Math.pow(lngRange, 2))
 
   console.log('🍄',largestRange);
-  const zoomLevel = 9 * (Math.exp(-0.1 * largestRange));
+  const zoomLevel = -1.40698 * Math.log(0.00243162 * largestRange);
   console.log('🔥', zoomLevel)
   if (zoomLevel < 1.8) {
     return 1.8;
