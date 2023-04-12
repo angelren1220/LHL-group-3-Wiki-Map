@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/maps_list.css" />
+  <link rel="stylesheet" href="/styles/maps.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
 
@@ -20,10 +21,10 @@
 <body>
   <!-- form for map creation -->
   <div class="map-form">
-  <h3>Add a new map</h3>
+  <h1>Add a new map</h1>
   <form action="/maps/new" method="POST">
     <div class="add-map">
-      <label>Map Name</label>
+      <label class="form-label">Map Name</label>
       <input
         type="text"
         name="name"
