@@ -1,42 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/styles/new.css" />
+  <link rel="stylesheet" href="/styles/slider.css" />
   <title>User Login</title>
 </head>
 <%- include('navbar') %>
-<body>
-  <main>
-    <div class="functional">
-    <h3 >User Login</h3>
-    <form action="/users/login" method="POST">
-      <div class="form-element">
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="example@gmail.com"
-        />
+
+  <body>
+    <main>
+      <div class="functional">
+        <h3>User Login</h3>
+        <form action="/users/login" method="POST">
+          <div class="form-element">
+            <input type="email" name="email" id="email" placeholder="example@gmail.com" />
+          </div>
+          <div class="form-element">
+            <input type="password" name="password" id="password" placeholder="password" />
+          </div>
+          <button type="submit" class="submit">Login</button>
+          <p>New to Maps? Register <a href="/users/register" class="red">Here</a></p>
+        </form>
       </div>
-      <div class="form-element">
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="password"
-        />
-      </div>
-      <button type="submit" class="submit">Login</button>
-      <p>New to Maps? Register  <a href="/users/register" class="red">Here</a></p>
-    </form>
-    </div>
-    <div class="graphical">
-       <img class="logo-large" src="https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/kades-branch/docs/maps_icon.png?raw=true" alt="logo">
-      <p class="caption">Create and explore user made maps!</p>
-    </div>
-  </main>
-</body>
+      <div class="graphical">
+        <!-- Slideshow container -->
+        <div class="slideshow-container">
+
+          <!-- Full-width images with number and caption text -->
+          <div class="mySlides fade">
+            <div class="numbertext">1 / 3</div>
+            <img src="https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/master/docs/map2.png?raw=true"
+              style="width:100%" class="g">
+          </div>
+
+          <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <img src="https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/master/docs/map3.png?raw=true"
+              style="width:100%" class="g">
+          </div>
+
+          <div class="mySlides fade">
+            <div class="numbertext">3 / 3</div>
+            <img src="https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/master/docs/map3.png?raw=true"
+              style="width:100%" class="g">
+          </div>
+        </div>
+        <p class="caption">Create and explore user made maps!</p>
+    </main>
+    <script>
+      let slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+      }
+    </script>
+  </body>
+
 </html>
