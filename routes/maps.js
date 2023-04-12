@@ -1,6 +1,7 @@
 const express = require('express');
 const mapsQueries = require('../db/queries/maps');
 const userQueries = require('../db/queries/users');
+const pinsQueries = require('../db/queries/pins');
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.get('/list', (req, res) => {
 
 });
 
-router.get('/user_list', (req, res) => {
+router.get('/api/list', (req, res) => {
   const userEmail = req.session.user_email;
   const user = userQueries.getUserWithEmail(userEmail);
   if (!user) {
@@ -30,12 +31,30 @@ router.get('/user_list', (req, res) => {
 
 });
 
-
 router.get('/new', (req, res) => {
   const userEmail = req.session.user_email;
   const user = userQueries.getUserWithEmail(userEmail);
   const templateVars = { user };
   res.render('maps_new', templateVars);
+});
+
+router.get('/pins/new', (req, res) => {
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
+  const templateVars = { user };
+  res.render('pins_new', templateVars);
+});
+
+router.get('/api/new', (req, res) => {
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
+  if (!user) {
+    return res.redirect('/');
+  }
+  userQueries.getUserIDWithEmail(userEmail).then((data) => {
+    res.json(data);
+  });
+
 });
 
 router.get('/test', (req, res) => {
@@ -58,6 +77,24 @@ router.get('/:id', (req, res) => {
   }).catch((err) => { '🐠', err; });
 });
 
+// post method
+router.post("/new", (req, res) => {
+  const map = {
+    user_id: 1,
+    name: req.body.map_name,
+    zoom: req.body.zoom
+  };
 
+  console.log(map);
+  mapsQueries
+    .addMap(map)
+    .then((map) => {
+      if (!map) {
+        return res.send({ error: "error" });
+      }
+      res.redirect("list");
+    })
+    .catch((err) => res.send(err));
+});
 
 module.exports = router;
