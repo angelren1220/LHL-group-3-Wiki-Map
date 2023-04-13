@@ -46,7 +46,9 @@ router.post("/register", (req, res) => {
   if (!(user.name && user.email && user.password)) {
     return res.status(400).send("Cannot register with empty string! <a href='/users/register'>back</a>");
   }
-
+  if (userQueries.getUserWithEmail(user.email)) {
+    
+  }
   user.password = bcrypt.hashSync(user.password, 12);
   userQueries
     .addUser(user)
