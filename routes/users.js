@@ -50,8 +50,8 @@ router.post("/register", (req, res) => {
       if (!user) {
         return res.send({ error: "error" });
       }
-      console.log(`sucessfully registered as ${req.body.id}`);
-      req.session.user_id = req.user.id;
+      console.log(`sucessfully registered as ${user.id}`);
+
       res.redirect("/");
     })
     .catch((err) => res.send(err));
