@@ -69,13 +69,15 @@ router.get('/pins/:id', (req, res) => {
   }).catch((err) => { '🐠', err; });
 });
 
+//display map with given map id
 router.get('/:id', (req, res) => {
   const mapId = req.params.id;
   const userEmail = req.session.user_email;
-  const user = userQueries.getUserWithEmail(userEmail);
+  const user = mapsQueries.getUserAndMap(mapId);
   mapsQueries.getMapObj(mapId).then((data) => {
-    const templateVars =  { data, user} ;
-    // console.log('💫',templateVars)
+    const user = data
+    const templateVars =  {user}  ;
+    console.log('💫',templateVars)
     res.render('maps_display', templateVars);
   }).catch((err) => { '🐠', err; });
 });

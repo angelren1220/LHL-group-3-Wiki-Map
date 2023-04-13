@@ -25,6 +25,23 @@ const getPinsByMapId = (mapId) => {
     .catch(err => console.log(err.message));
 };
 
+const getUserAndMap = (mapId) => {
+  return db.query(
+    `SELECT users.id, users.name, email, password, maps.name AS mapname
+    FROM users
+    JOIN maps ON maps.user_id = users.id
+    WHERE maps.id = 1
+    $1
+    GROUP BY maps.id, users.id;`,
+    [mapId]
+  )
+    .then((data) => {
+      console.log(data.rows[0]);
+      return data.rows[0];
+    })
+    .catch(err => console.log(err.message));
+}
+
 const getAvgLatLng = (mapId) => {
   return db.query(
     `SELECT avg(lat), avg(lng)
@@ -91,7 +108,8 @@ module.exports = {
   getAvgLatLng,
   getMapObj,
   getMapsWithUserEmail,
-  addMap
+  addMap,
+  getUserAndMap,
 };
 
 
