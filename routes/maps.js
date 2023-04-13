@@ -16,9 +16,9 @@ router.get('/list', (req, res) => {
   if (!userId) {
     return res.redirect('/');
   }
-  mapsQueries.getMapsWithUserEmail(user.user_name).then((data) => {
+  mapsQueries.getMapsWithUserId(user.user_name).then((data) => {
     const templateVars = { maps: data, user };
-    res.render('maps_list', templateVars)
+    res.render('maps_list', templateVars);
   });
 });
 
