@@ -123,4 +123,12 @@ router.post("/pins/new", (req, res) => {
     .catch((err) => res.send(err));
 });
 
+router.post("/delete/:id", (req, res) => {
+  const id = req.params.id;
+  mapsQueries.deleteMap(id).then(() => {
+    res.redirect("/maps/list");
+  });
+
+});
+
 module.exports = router;
