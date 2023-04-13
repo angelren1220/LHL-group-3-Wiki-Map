@@ -52,13 +52,13 @@ const getMapObj = (mapId) => {
     .catch(err => console.log(err.message));
 };
 
-const getMapsWithUserEmail = (email) => {
+const getMapsWithUserId = (id) => {
   return db.
   query(
     `SELECT maps.id AS id, maps.name AS name FROM maps
     JOIN users ON user_id = users.id
-    WHERE users.email = $1;`,
-    [email])
+    WHERE users.id = $1;`,
+    [id])
   .then(data => {
     return data.rows;
   })
@@ -84,14 +84,28 @@ const addMap = (map) => {
   });
 };
 
+const deleteMap = (mapId) => {
+  return db.
+  query(
+    `DELETE FROM maps WHERE id = $1`,
+    [Number(mapId)])
+  .then(() => {
+    return "Delete map successfully";
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+};
+
 
 module.exports = {
   getMaps,
   getPinsByMapId,
   getAvgLatLng,
   getMapObj,
-  getMapsWithUserEmail,
-  addMap
+  getMapsWithUserId,
+  addMap,
+  deleteMap
 };
 
 
