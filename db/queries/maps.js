@@ -134,7 +134,9 @@ module.exports = {
   getAvgLatLng,
   getMapObj,
   addMap,
-  deleteMap
+  deleteMap,
+  getUserAndMap,
+  getMapData
 };
 
 
