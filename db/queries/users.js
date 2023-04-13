@@ -24,8 +24,8 @@ const addUser = (user) => {
      VALUES ($1, $2, $3)
      RETURNING *;`,
     [user.name, user.email.toLowerCase(), user.password])
-  .then(() => {
-    return "Add new user successfully";
+  .then((result) => {
+    return result.rows[0];
   })
   .catch((err) => {
     console.log(err.message);

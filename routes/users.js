@@ -19,11 +19,11 @@ router.post("/login", (req, res) => {
 
   userQueries.getUserWithEmail(email).then((user) => {
     if (!user) {
-      return res.send({ error: "error user not exists" });
+      return res.status(403).send("Invalid login! <a href='/users/login'>back</a>");
     }
 
     if (!bcrypt.compareSync(password, user.password)) {
-      return res.send({ error: "error password wrong" });
+      return res.status(403).send("Invalid login! <a href='/users/login'>back</a>");
     }
 
     req.session.user_id = user.id;
@@ -43,6 +43,12 @@ router.post("/logout", (req, res) => {
 // Register a new user
 router.post("/register", (req, res) => {
   const user = req.body;
+  if (!(user.name && user.email && user.password)) {
+    return res.status(400).send("Cannot register with empty string! <a href='/users/register'>back</a>");
+  }
+  if (userQueries.getUserWithEmail(user.email)) {
+
+  }
   user.password = bcrypt.hashSync(user.password, 12);
   userQueries
     .addUser(user)
