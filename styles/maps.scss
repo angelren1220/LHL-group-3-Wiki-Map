@@ -1,3 +1,7 @@
+.map_area {
+  margin-top: 110px;
+}
+
 #map {
   height: 40em;
   width: 90%;
@@ -30,6 +34,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 100px;
   min-height: 100vh;
   padding-top: 110px ;
   background-color: #fff5d8;

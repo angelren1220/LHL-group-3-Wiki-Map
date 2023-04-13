@@ -47,7 +47,7 @@ router.post("/register", (req, res) => {
     return res.status(400).send("Cannot register with empty string! <a href='/users/register'>back</a>");
   }
   if (userQueries.getUserWithEmail(user.email)) {
-    
+
   }
   user.password = bcrypt.hashSync(user.password, 12);
   userQueries
@@ -57,8 +57,6 @@ router.post("/register", (req, res) => {
         return res.send({ error: "error" });
       }
       console.log(`sucessfully registered as ${user.id}`);
-      req.session.user_id = user.id;
-      req.session.user_name = user.name;
 
       res.redirect("/");
     })
@@ -75,6 +73,20 @@ router.get('/', (req, res) => {
 
   const templateVars = { user };
   res.render('users', templateVars);
+});
+
+router.get('/', (req, res) => {
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
+  const templateVars = { user };
+  res.render('users', templateVars);
+});
+
+router.get('/verify', (req, res) => {
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
+  const templateVars = { user };
+  res.json(templateVars);
 });
 
 router.get('/login', (req, res) => {

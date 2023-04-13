@@ -1,6 +1,6 @@
 const express = require('express');
 const mapsQueries = require('../db/queries/maps');
-// const userQueries = require('../db/queries/users');
+const userQueries = require('../db/queries/users');
 const pinsQueries = require('../db/queries/pins');
 
 const router = express.Router();
@@ -16,10 +16,8 @@ router.get('/list', (req, res) => {
   if (!userId) {
     return res.redirect('/');
   }
-  mapsQueries.getMapsWithUserId(userId).then((data) => {
+  mapsQueries.getMapsWithUserEmail(user.user_name).then((data) => {
     const templateVars = { maps: data, user };
-    console.log(`rendering data for user id: ${userId}`);
-    res.render('maps_list', templateVars);
   });
 
 });
@@ -66,6 +64,18 @@ router.get('/pins/new', (req, res) => {
 
 // });
 
+router.get('/mapdata/:id', (req, res) => {
+  const mapId = req.params.id;
+  if (!mapId) {
+    return null;
+  };
+  mapsQueries.getMapData(mapId).then((data) => {
+    const templateVars = data;
+    console.log('🐹', templateVars);
+    res.json({ templateVars });
+  });
+});
+
 router.get('/test', (req, res) => {
   res.render('maps_display', templateVars);
 });
@@ -78,17 +88,12 @@ router.get('/pins/:id', (req, res) => {
   }).catch((err) => { '🐠', err; });
 });
 
+//display map with given map id, user info passed for navbar
 router.get('/:id', (req, res) => {
-  const mapId = req.params.id;
-  const user = {
-    userId: req.session.user_id,
-    userName: req.session.user_name
-  };
-  mapsQueries.getMapObj(mapId).then((data) => {
-    const templateVars = { data, user };
-    // console.log('💫',templateVars)
-    res.render('maps_display', templateVars);
-  }).catch((err) => { '🐠', err; });
+  const userEmail = req.session.user_email;
+  const user = userQueries.getUserWithEmail(userEmail);
+  const templateVars = { user };
+  res.render('maps_display', templateVars);
 });
 
 // post method
