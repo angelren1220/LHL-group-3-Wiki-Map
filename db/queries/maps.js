@@ -52,13 +52,13 @@ const getMapObj = (mapId) => {
     .catch(err => console.log(err.message));
 };
 
-const getMapsWithUserEmail = (email) => {
+const getMapsWithUserId = (id) => {
   return db.
   query(
     `SELECT maps.id AS id, maps.name AS name FROM maps
     JOIN users ON user_id = users.id
-    WHERE users.email = $1;`,
-    [email])
+    WHERE users.id = $1;`,
+    [id])
   .then(data => {
     return data.rows;
   })
@@ -90,7 +90,7 @@ module.exports = {
   getPinsByMapId,
   getAvgLatLng,
   getMapObj,
-  getMapsWithUserEmail,
+  getMapsWithUserId,
   addMap
 };
 
