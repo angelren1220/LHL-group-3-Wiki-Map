@@ -69,3 +69,17 @@ textarea{
   display: flex;
   flex-direction: column;
 }
+
+button{
+  background-color: red;
+  font-size: 20px;
+  padding: 5px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  filter: brightness(70%);
+  cursor: pointer;
+}
