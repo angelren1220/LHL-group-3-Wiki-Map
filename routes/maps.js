@@ -66,13 +66,18 @@ router.get('/pins/new', (req, res) => {
 
 router.get('/mapdata/:id', (req, res) => {
   const mapId = req.params.id;
+  const user = {
+    userId: req.session.user_id,
+    userName: req.session.user_name
+  };
+
   if (!mapId) {
     return null;
   };
   mapsQueries.getMapData(mapId).then((data) => {
-    const templateVars = data;
+    const templateVars = { data, user };
     console.log('🐹', templateVars);
-    res.json({ templateVars });
+    res.json(templateVars);
   });
 });
 
@@ -90,8 +95,10 @@ router.get('/pins/:id', (req, res) => {
 
 //display map with given map id, user info passed for navbar
 router.get('/:id', (req, res) => {
-  const userEmail = req.session.user_email;
-  const user = userQueries.getUserWithEmail(userEmail);
+  const user = {
+    userId: req.session.user_id,
+    userName: req.session.user_name
+  };
   const templateVars = { user };
   res.render('maps_display', templateVars);
 });

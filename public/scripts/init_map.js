@@ -142,9 +142,9 @@ $(document).ready(function() {
   $.ajax({
     url: `/maps/mapdata/${myUrl}`,
     success: function(data) {
-      const mapdata = data.templateVars;
-      console.log("🎃", mapdata.name);
-      $('#mapname').append(`<h3>${mapdata.name}</h3>`);
+      const mapdata = data.data;
+      console.log("🎃", data);
+      $('#mapname').append(`<h1>${mapdata.name}</h1>`);
     }
   }).then((data) => {
     console.log("🐶", data);
