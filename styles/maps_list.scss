@@ -1,8 +1,31 @@
 #maps {
   display: flex;
   flex-direction: column;
+  width: 600px;
 }
 
 .black{
-  color: black;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  color: #136F63;
+  text-decoration: none;
+  background-color: #fff5d8;
+  border: solid #136F63 5px;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 12px;
+  width: 100%;
+  font-size: 30px;
 }
+
+h3{
+  display: flex;
+  font-size: 60px;
+  font-family: sans-serif;
+  margin-bottom: 20px;
+  margin-top: 0%;
+  color:#136F63
+}
+
+

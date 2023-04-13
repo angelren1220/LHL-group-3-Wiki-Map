@@ -9,13 +9,13 @@
           <label for="email">Hello!</label>
           <button type="submit" class="logout">Logout</button>
         </form>
-        <a href="/maps/new">New Map</a>
-        <a href="/maps/pins/new">New Pin</a>
+        <a href="/maps/new" class="header-link">New Map</a>
+        <a href="/maps/pins/new" class="header-link">New Pin</a>
         <% } else { %>
-          <a href="/users/login">Login</a>
-          <a href="/users/register">Register</a>
+          <a href="/users/login" class="header-link">Login</a>
+          <a href="/users/register" class="header-link">Register</a>
           <% } %>
-          <a href="/maps/list">Maps List</a>
+          <a href="/maps/list" class="header-link">Maps List</a>
     </div>
     <script>
 $(document).ready(function() {
