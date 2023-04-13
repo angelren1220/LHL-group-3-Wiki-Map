@@ -12,6 +12,23 @@ const getMaps = () => {
     });
 };
 
+const getMapsWithUserId = (id) => {
+  return db.
+  query(
+    `SELECT maps.id AS id, maps.name AS name FROM maps
+    JOIN users ON user_id = users.id
+    WHERE users.id = $1;`,
+    [id])
+  .then(data => {
+    return data.rows;
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+};
+
 const getPinsByMapId = (mapId) => {
   return db.query(
     `SELECT *
@@ -50,23 +67,6 @@ const getMapObj = (mapId) => {
       return data.rows[0];
     })
     .catch(err => console.log(err.message));
-};
-
-const getMapsWithUserEmail = (email) => {
-  return db.
-    query(
-      `SELECT maps.id AS id, maps.name AS name FROM maps
-    JOIN users ON user_id = users.id
-    WHERE users.email = $1;`,
-      [email])
-    .then(data => {
-      return data.rows;
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
 };
 
 const addMap = (map) => {
@@ -127,16 +127,12 @@ const deleteMap = (mapId) => {
   });
 };
 
-
 module.exports = {
   getMaps,
+  getMapsWithUserId,
   getPinsByMapId,
   getAvgLatLng,
   getMapObj,
-  getMapsWithUserEmail,
-  addMap,
-  getUserAndMap,
-  getMapData,
   addMap,
   deleteMap
 };
