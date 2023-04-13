@@ -1,8 +1,85 @@
 #maps {
   display: flex;
   flex-direction: column;
+  width: 600px;
 }
 
 .black{
-  color: black;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  color: #136F63;
+  text-decoration: none;
+  background-color: beige;
+  border: solid #136F63 5px;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 12px;
+  width: 100%;
+  font-size: 30px;
+}
+
+h3{
+  display: flex;
+  font-size: 60px;
+  font-family: sans-serif;
+  margin-bottom: 20px;
+  margin-top: 0%;
+  color:#136F63
+}
+
+.new-pin-form{
+display: flex;
+
+align-items: flex-start;
+}
+
+
+
+.add-pin{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.pin-label{
+align-items: flex-end;
+justify-content: flex-end;
+color:#136F63;
+padding-bottom: 5px;
+font-size: 25px;
+}
+
+.pin-input{
+  padding-left: 100;
+  width: 60%;
+  font-size: 25px;
+}
+
+textarea{
+  border: solid #136F63 3px;
+  border-radius: 10px;
+  background-color: beige;
+  font-size: 25px;
+}
+
+.description{
+  display: flex;
+  flex-direction: column;
+}
+
+button{
+  background-color: red;
+  font-size: 20px;
+  padding: 5px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  filter: brightness(70%);
+  cursor: pointer;
 }

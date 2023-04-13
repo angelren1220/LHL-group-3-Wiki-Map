@@ -26,14 +26,17 @@ router.post("/login", (req, res) => {
       return res.send({ error: "error password wrong" });
     }
 
-    req.session.user_email = user.email;
+    req.session.user_id = user.id;
+    req.session.user_name = user.name;
+    //console.log(`login as ${user.id}`);
     res.redirect("/");
   });
 });
 
 // Log a user out
 router.post("/logout", (req, res) => {
-  req.session.user_email = null;
+  req.session.user_id = null;
+  req.session.user_name = null;
   res.redirect("/");
 });
 
@@ -47,8 +50,8 @@ router.post("/register", (req, res) => {
       if (!user) {
         return res.send({ error: "error" });
       }
+      console.log(`sucessfully registered as ${user.id}`);
 
-      req.session.user_email = req.body.email;
       res.redirect("/");
     })
     .catch((err) => res.send(err));
@@ -57,8 +60,11 @@ router.post("/register", (req, res) => {
 
 // get methods
 router.get('/', (req, res) => {
-  const userEmail = req.session.user_email;
-  const user = userQueries.getUserWithEmail(userEmail);
+  const user = {
+    userId: req.session.user_id,
+    userName: req.session.user_name
+  };
+
   const templateVars = { user };
   res.render('users', templateVars);
 });
@@ -78,10 +84,14 @@ router.get('/verify', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  const userEmail = req.session.user_email;
-  const user = userQueries.getUserWithEmail(userEmail);
+  const userId = req.session.user_id;
+  const user = {
+    userId: req.session.user_id,
+    userName: req.session.user_name
+  };
+  //console.log(userId);
 
-  if (user) {
+  if (userId) {
     return res.redirect("/");
   }
 
@@ -98,10 +108,13 @@ router.get('/login', (req, res) => {
 
 router.get("/register", (req, res) => {
   // if user is logged in, redirect to url
+  const userId = req.session.user_id;
+  const user = {
+    userId: req.session.user_id,
+    userName: req.session.user_name
+  };
 
-  const userEmail = req.session.user_email;
-  const user = userQueries.getUserWithEmail(userEmail);
-  if (user) {
+  if (userId) {
     return res.redirect("/");
   }
 

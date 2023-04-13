@@ -18,3 +18,6 @@ INSERT INTO pins (user_id, map_id, lat, lng, name, description, image_url)
 VALUES (3, 4, 43.25, 32.45, 'cafe', 'best expresso ever', 'https://www.pexels.com/photo/pink-rose-in-vase-centerpiece-on-brown-wooden-table-1024359/');
 INSERT INTO pins (user_id, map_id, lat, lng, name, description, image_url)
 VALUES (3, 4, 0, -179, 'bakery', 'best bread ever', 'https://www.pexels.com/photo/pink-rose-in-vase-centerpiece-on-brown-wooden-table-1024359/');
+
+INSERT INTO pins (user_id, map_id, lat, lng, name, description, image_url)
+VALUES (2, 2, 35.69, 139.70, 'tokyu plaza rooftop garden', 'goergeous rooftop garden', 'https://media.timeout.com/images/105952726/750/422/image.jpg');

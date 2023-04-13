@@ -4,18 +4,18 @@
   <nav>
     <div class ="nav_links">
       <a href="/"><img class="logo" src="https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/kades-branch/docs/maps_icon.png?raw=true" alt="logo"></a>
-      <% if (user) { %>
+      <% if (user.userId) { %>
         <form action="/users/logout" method="POST" class="logout-button">
-          <label for="email">Hello!</label>
+          <label for="email">Hello! <%= user.userName %></label>
           <button type="submit" class="logout">Logout</button>
         </form>
-        <a href="/maps/new">New Map</a>
-        <a href="/maps/pins/new">New Pin</a>
+        <a href="/maps/new" class="header-link">New Map</a>
+        <a href="/maps/pins/new" class="header-link">New Pin</a>
         <% } else { %>
-          <a href="/users/login">Login</a>
-          <a href="/users/register">Register</a>
+          <a href="/users/login" class="header-link">Login</a>
+          <a href="/users/register" class="header-link">Register</a>
           <% } %>
-          <a href="/maps/list">Maps List</a>
+          <a href="/maps/list" class="header-link">Maps List</a>
     </div>
     <script>
 $(document).ready(function() {

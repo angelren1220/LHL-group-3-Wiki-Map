@@ -114,6 +114,19 @@ const getMapData = (mapId) => {
     .catch(err => console.log('👑', err.message));
 };
 
+const deleteMap = (mapId) => {
+  return db.
+  query(
+    `DELETE FROM maps WHERE id = $1`,
+    [Number(mapId)])
+  .then(() => {
+    return "Delete map successfully";
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+};
+
 
 module.exports = {
   getMaps,
@@ -124,6 +137,8 @@ module.exports = {
   addMap,
   getUserAndMap,
   getMapData,
+  addMap,
+  deleteMap
 };
 
 
