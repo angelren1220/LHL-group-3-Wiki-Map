@@ -20,4 +20,4 @@ INSERT INTO pins (user_id, map_id, lat, lng, name, description, image_url)
 VALUES (3, 4, 0, -179, 'bakery', 'best bread ever', 'https://www.pexels.com/photo/pink-rose-in-vase-centerpiece-on-brown-wooden-table-1024359/');
 
 INSERT INTO pins (user_id, map_id, lat, lng, name, description, image_url)
-VALUES (2, 2, 35.66, 139.70, 'Tokyu plaza rooftop garden', 'a gorgeous rooftop garden', 'https://www.google.com/maps/place/Starbucks+Coffee+-+Tokyu+Plaza+Omotesando+Harajuku/@35.6688616,139.706037,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipOdWm0ZzggyimZBimXxdSn3kEUKorOz7ZAQNeTp!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipOdWm0ZzggyimZBimXxdSn3kEUKorOz7ZAQNeTp%3Dw203-h152-k-no!7i4032!8i3024!4m7!3m6!1s0x60188ca47dd15109:0xd9b9cfeedbe93437!8m2!3d35.6688616!4d139.706037!10e5!16s%2Fg%2F1hm4r_c37!5m1!1e4#');
+VALUES (2, 2, 35.69, 139.70, 'tokyu plaza rooftop garden', 'goergeous rooftop garden', 'https://media.timeout.com/images/105952726/750/422/image.jpg');
