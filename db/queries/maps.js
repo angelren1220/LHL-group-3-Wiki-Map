@@ -2,14 +2,14 @@ const db = require('../connection');
 
 const getMaps = () => {
   return db.query('SELECT * FROM maps;')
-  .then(data => {
-    return data.rows;
-  })
-  .catch(err => {
-    res
-      .status(500)
-      .json({ error: err.message });
-  });
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 };
 
 const getPinsByMapId = (mapId) => {
@@ -24,23 +24,6 @@ const getPinsByMapId = (mapId) => {
     })
     .catch(err => console.log(err.message));
 };
-
-const getUserAndMap = (mapId) => {
-  return db.query(
-    `SELECT users.id, users.name, email, password, maps.name AS mapname
-    FROM users
-    JOIN maps ON maps.user_id = users.id
-    WHERE maps.id = 1
-    $1
-    GROUP BY maps.id, users.id;`,
-    [mapId]
-  )
-    .then((data) => {
-      console.log(data.rows[0]);
-      return data.rows[0];
-    })
-    .catch(err => console.log(err.message));
-}
 
 const getAvgLatLng = (mapId) => {
   return db.query(
@@ -71,34 +54,64 @@ const getMapObj = (mapId) => {
 
 const getMapsWithUserEmail = (email) => {
   return db.
-  query(
-    `SELECT maps.id AS id, maps.name AS name FROM maps
+    query(
+      `SELECT maps.id AS id, maps.name AS name FROM maps
     JOIN users ON user_id = users.id
     WHERE users.email = $1;`,
-    [email])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(err => {
-    res
-      .status(500)
-      .json({ error: err.message });
-  });
+      [email])
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 };
 
 const addMap = (map) => {
   return db.
-  query(
-    `INSERT INTO maps (user_id, name)
+    query(
+      `INSERT INTO maps (user_id, name)
      VALUES ($1, $2)
      RETURNING *;`,
-    [map.user_id, map.name])
-  .then(() => {
-    return "Add new map successfully";
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+      [map.user_id, map.name])
+    .then(() => {
+      return "Add new map successfully";
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+const getUserAndMap = (mapId) => {
+  return db.query(
+    `SELECT users.id, users.name, email, password, maps.name AS mapname
+    FROM users
+    LEFT JOIN maps ON maps.user_id = users.id
+    WHERE maps.id = $1
+    GROUP BY maps.id, users.id;`,
+    [mapId]
+  )
+    .then((data) => {
+      console.log('🛹', data.rows[0]);
+      return data.rows[0];
+    })
+    .catch(err => console.log('🤺', err.message));
+};
+
+const getMapData = (mapId) => {
+  return db.query(
+    `SELECT *
+    FROM maps
+    WHERE id = $1`,
+    [mapId]
+  )
+    .then((data) => {
+      console.log('🤖', data.rows[0]);
+      return data.rows[0];
+    })
+    .catch(err => console.log('👑', err.message));
 };
 
 
@@ -110,6 +123,7 @@ module.exports = {
   getMapsWithUserEmail,
   addMap,
   getUserAndMap,
+  getMapData,
 };
 
 

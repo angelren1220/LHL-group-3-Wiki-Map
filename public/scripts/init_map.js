@@ -6,7 +6,6 @@ let markers = [];
 const avgPinLocation = (pinData) => {
   let totalLat = 0;
   let totalLng = 0;
-  console.log('🍉',pinData);
   for (let i = 0; i < pinData.length; i++) {
     totalLat += pinData[i].lat;
     totalLng += pinData[i].lng;
@@ -62,13 +61,13 @@ const calcZoomFactor = (pinData) => {
     }
   };
 
-  let latRange = maxLat-minLat;
+  let latRange = maxLat - minLat;
   if (latRange > 180) {
     latRange = 180 - (latRange - 180);
   };
-  const lngRange = maxLng-minLng;
+  const lngRange = maxLng - minLng;
 
-  const largestRange = Math.sqrt(Math.pow(latRange, 2) + Math.pow(lngRange, 2))
+  const largestRange = Math.sqrt(Math.pow(latRange, 2) + Math.pow(lngRange, 2));
 
   const zoomLevel = -1.40698 * Math.log(0.00243162 * largestRange);
   if (zoomLevel < 1.8) {
@@ -138,6 +137,17 @@ $(document).ready(function() {
       //pinData is an array of objects. Each pin object must have: lat and lng, and can optionally have: name, description, image_url
       initMap(pinData, avgPinLocation(pinData), calcZoomFactor(pinData));
     },
+  });
+
+  $.ajax({
+    url: `/maps/mapdata/${myUrl}`,
+    success: function(data) {
+      const mapdata = data.templateVars;
+      console.log("🎃", mapdata.name);
+      $('#mapname').append(`<h1>${mapdata.name}</h1>`);
+    }
+  }).then((data) => {
+    console.log("🐶", data);
   });
 
 });

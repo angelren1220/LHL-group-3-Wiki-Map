@@ -13,7 +13,7 @@ router.get('/list', (req, res) => {
     return res.redirect('/');
   }
   mapsQueries.getMapsWithUserEmail(userEmail).then((data) => {
-    const templateVars = {maps: data, user};
+    const templateVars = { maps: data, user };
     res.render('maps_list', templateVars);
   });
 
@@ -57,6 +57,18 @@ router.get('/api/new', (req, res) => {
 
 });
 
+router.get('/mapdata/:id', (req, res) => {
+  const mapId = req.params.id;
+  if (!mapId) {
+    return null;
+  };
+  mapsQueries.getMapData(mapId).then((data) => {
+    const templateVars = data;
+    console.log('🐹', templateVars);
+    res.json({ templateVars });
+  });
+});
+
 router.get('/test', (req, res) => {
   res.render('maps_display', templateVars);
 });
@@ -69,17 +81,12 @@ router.get('/pins/:id', (req, res) => {
   }).catch((err) => { '🐠', err; });
 });
 
-//display map with given map id
+//display map with given map id, user info passed for navbar
 router.get('/:id', (req, res) => {
-  const mapId = req.params.id;
   const userEmail = req.session.user_email;
-  const user = mapsQueries.getUserAndMap(mapId);
-  mapsQueries.getMapObj(mapId).then((data) => {
-    const user = data
-    const templateVars =  {user}  ;
-    console.log('💫',templateVars)
-    res.render('maps_display', templateVars);
-  }).catch((err) => { '🐠', err; });
+  const user = userQueries.getUserWithEmail(userEmail);
+  const templateVars = { user };
+  res.render('maps_display', templateVars);
 });
 
 // post method
