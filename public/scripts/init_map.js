@@ -144,7 +144,7 @@ $(document).ready(function() {
     success: function(data) {
       const mapdata = data.templateVars;
       console.log("🎃", mapdata.name);
-      $('#mapname').append(`<h1>${mapdata.name}</h1>`);
+      $('#mapname').append(`<h3>${mapdata.name}</h3>`);
     }
   }).then((data) => {
     console.log("🐶", data);

@@ -18,8 +18,8 @@ router.get('/list', (req, res) => {
   }
   mapsQueries.getMapsWithUserEmail(user.user_name).then((data) => {
     const templateVars = { maps: data, user };
+    res.render('maps_list', templateVars)
   });
-
 });
 
 router.get('/api/list', (req, res) => {

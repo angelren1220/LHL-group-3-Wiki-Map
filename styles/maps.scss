@@ -1,12 +1,17 @@
-.map_area {
-  margin-top: 110px;
-}
-
 #map {
   height: 40em;
   width: 90%;
   border-radius: 10px;
   border: solid #136F63 5px;
+}
+
+#mapname{
+  display: flex;
+  font-size: 40px;
+  font-family: sans-serif;
+  margin-bottom: 20px;
+  margin-top: 0%;
+  color:#136F63
 }
 
 .pin-info {
@@ -36,7 +41,7 @@ body {
   align-items: center;
   margin-top: 100px;
   min-height: 100vh;
-  padding-top: 110px ;
+  padding-top: 10px ;
   background-color: #fff5d8;
   background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
 }
