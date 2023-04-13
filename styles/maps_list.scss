@@ -10,7 +10,7 @@
   justify-content: center;
   color: #136F63;
   text-decoration: none;
-  background-color: #fff5d8;
+  background-color: beige;
   border: solid #136F63 5px;
   border-radius: 10px;
   padding: 5px;
@@ -28,4 +28,44 @@ h3{
   color:#136F63
 }
 
+.new-pin-form{
+display: flex;
 
+align-items: flex-start;
+}
+
+
+
+.add-pin{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.pin-label{
+align-items: flex-end;
+justify-content: flex-end;
+color:#136F63;
+padding-bottom: 5px;
+font-size: 25px;
+}
+
+.pin-input{
+  padding-left: 100;
+  width: 60%;
+  font-size: 25px;
+}
+
+textarea{
+  border: solid #136F63 3px;
+  border-radius: 10px;
+  background-color: beige;
+  font-size: 25px;
+}
+
+.description{
+  display: flex;
+  flex-direction: column;
+}
