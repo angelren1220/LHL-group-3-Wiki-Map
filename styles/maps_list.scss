@@ -60,11 +60,21 @@ font-size: 25px;
   font-size: 25px;
 }
 
+.pin-input:focus {
+  outline: none;
+  box-shadow: 0 0 10px #136F63;
+}
+
 textarea{
   border: solid #136F63 3px;
   border-radius: 10px;
   background-color: beige;
   font-size: 25px;
+}
+
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 10px #136F63;
 }
 
 .description{
