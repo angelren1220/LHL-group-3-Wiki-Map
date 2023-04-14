@@ -4,9 +4,13 @@ Wiki Map is a web app that allows users to collaboratively create maps which lis
 
 ## Final Product
 
-!["description"](url)
-!["description"](url)
-!["description"](url)
+!["login_page"](https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/master/docs/6_login.png?raw=true)
+!["register_page"](https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/master/docs/7_register.png?raw=true)
+!["user_maps_list"](https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/master/docs/5_usermaps.png?raw=true)
+!["view_map"](https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/master/docs/2_viewmap.png?raw=true)
+!["pins_list_of_map"](https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/master/docs/3_pinsupper.png?raw=true)
+!["add_pins"](https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/master/docs/4_pinslower.png?raw=true)
+!["eidt_pin_in_map_eidtmode"](https://github.com/angelren1220/LHL-group-3-Wiki-Map/blob/master/docs/1_editmode.png?raw=true)
 
 
 ## Getting Started
