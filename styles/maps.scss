@@ -96,13 +96,14 @@ input{
   font-size: 30px;
   color:#136F63;
 }
-card-container{
+.card-container{
   display:flex;
   width: 885px;
   padding-top: 10px;
   margin: none;
   align-items: center;
   padding-left: 200px;
+  border: solid black 2px ;
 }
 
 iframe{
