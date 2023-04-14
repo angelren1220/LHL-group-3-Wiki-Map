@@ -48,7 +48,7 @@ router.get('/:id/pins', (req, res) => {
   }
   mapsQueries.getPinsByMapId(mapId).then((data) => {
     const templateVars = { maps: data, user };
-    res.render('pins_new', templateVars);
+    res.render('pins_list', templateVars);
   });
 });
 
@@ -89,7 +89,7 @@ router.get('/pins/new', (req, res) => {
     userName: req.session.user_name
   };
   const templateVars = { user };
-  res.render('pins_new', templateVars);
+  res.render('pins_list', templateVars);
 });
 
 router.get('/mapdata/:id', (req, res) => {
@@ -167,8 +167,9 @@ router.post("/new", (req, res) => {
     .catch((err) => res.send(err));
 });
 
-router.post("/pins/new", (req, res) => {
+router.post("/:id/pins/new", (req, res) => {
   let pin = req.body;
+  pin.map_id = req.params.id;
   pin.user_id = req.session.user_id;
   console.log(pin);
   pinsQueries
