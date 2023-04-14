@@ -56,7 +56,7 @@ app.get('/', (req, res) => {
     userName: req.session.user_name
   };
   const templateVars = { user };
-  res.render('index', templateVars);
+  res.render('login', templateVars);
 });
 
 app.listen(PORT, () => {
