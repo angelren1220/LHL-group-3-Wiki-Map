@@ -1,7 +1,10 @@
 $(() => {
+  const myUrl = window.location.pathname.split('/')[2];
+  const myUrl1 = myUrl[0];
+
   $.ajax({
     method: 'GET',
-    url: '/maps/api/:id/pins',
+    url: `/maps/api/${myUrl1}/pins`,
   })
     .then((data) => {
       const $pinsList = $('#pins');
