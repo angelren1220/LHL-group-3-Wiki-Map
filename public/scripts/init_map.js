@@ -43,7 +43,11 @@ const contentString = (pin, isEditable) => {
   `;
 
   if (!pin.name && !pin.description && !pin.image_url) {
-    return `<p> Anonymous Pin <p>`;
+    outputBuffer = `<p> Anonymous Pin <p>`;
+    if (isEditable) {
+      console.log('⛷',  pin);
+      outputBuffer += `<a href="/maps/editmode/${pin.map_id}" class="button map_pin_edit">Open Edit Mode</a>`;
+    }
   }
 
   return outputBuffer;
@@ -136,8 +140,7 @@ async function initMap(mapPinData, avgPinLocation, zoom, isPindataEditable) {
 $(document).ready(function() {
   //get map_id from url
   let myUrl = window.location.pathname.split('/')[2];
-  let myUrl1 = myUrl[0];
-  let myUrl2 = myUrl[1];
+  let myUrl1 = myUrl;
 
   if (!myUrl1) {
     myUrl = 1;

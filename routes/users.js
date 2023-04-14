@@ -63,7 +63,7 @@ router.post("/register", (req, res) => {
       // Store user id and name in the session and redirect to home page
       req.session.user_id = user.id;
       req.session.user_name = user.name;
-      res.redirect("/");
+      res.redirect("/maps/new");
     })
     .catch((err) => res.send(err));
 });
