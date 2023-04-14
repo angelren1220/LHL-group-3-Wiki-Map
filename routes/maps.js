@@ -11,7 +11,7 @@ router.get('/list', (req, res) => {
   const user = {
     userId,
     userName: req.session.user_name
-   };
+  };
 
   if (!userId) {
     return res.redirect('/');
@@ -105,8 +105,13 @@ router.get('/editmode/:id', (req, res) => {
     userId: req.session.user_id,
     userName: req.session.user_name
   };
-  const templateVars = { user };
-  res.render('maps_editmode', templateVars);
+  mapsQueries.getMapData(req.params.id).then((data) => {
+    if (data.user_id !== user.userId) {
+      res.redirect(`/maps/${data.id}`);
+    }
+    const templateVars = { user };
+    res.render('maps_editmode', templateVars);
+  });
 });
 
 //display map with given map id, user info passed for navbar
