@@ -147,6 +147,11 @@ $(document).ready(function() {
     success: function(data) {
       let pinData = data.templateVars.data;
       let currentUser = data.templateVars.user;
+      // if there is no pin to show map, alert text
+      if(!pinData.data) {
+        $('#map').text('Add at least one pin to view the map').addClass('alert');
+      }
+      // if user is not login, alert text
       console.log('🍓', pinData[0].user_id, currentUser.userId);
       const mapCreatorId = pinData[0].user_id
       const userId = currentUser.userId
