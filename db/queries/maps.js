@@ -94,14 +94,14 @@ const getUserAndMap = (mapId) => {
     [mapId]
   )
     .then((data) => {
-      console.log('🛹', data.rows[0]);
+      
       return data.rows[0];
     })
     .catch(err => console.log('🤺', err.message));
 };
 
 const getMapData = (mapId) => {
-  console.log('🏀', mapId);
+
   return db.query(
     `SELECT *
     FROM maps
@@ -109,7 +109,7 @@ const getMapData = (mapId) => {
     [mapId]
   )
     .then((data) => {
-      console.log('🤖', data.rows[0]);
+
       return data.rows[0];
     })
     .catch(err => console.log('👑', err.message));

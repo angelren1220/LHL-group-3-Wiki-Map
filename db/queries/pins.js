@@ -44,7 +44,6 @@ const addPin = (pin) => {
 };
 
 const editPin = (pin) => {
-  console.log('🥎', pin);
 
   return db.
     query(`
