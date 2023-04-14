@@ -101,10 +101,11 @@ const getUserAndMap = (mapId) => {
 };
 
 const getMapData = (mapId) => {
+  console.log('🏀', mapId);
   return db.query(
     `SELECT *
     FROM maps
-    WHERE id = $1`,
+    WHERE id = $1;`,
     [mapId]
   )
     .then((data) => {
@@ -136,7 +137,7 @@ module.exports = {
   addMap,
   deleteMap,
   getUserAndMap,
-  getMapData
+  getMapData,
 };
 
 
