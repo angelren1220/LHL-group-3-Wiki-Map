@@ -44,7 +44,10 @@ color: #136F63;
 font-size: 50px;
 }
 
-
+input:focus {
+  outline: none;
+  box-shadow: 0 0 10px #136F63;
+}
 
 .map-form{
   display:flex;
@@ -125,6 +128,10 @@ iframe{
   margin-top: 10px;
   border-radius: 10px;
   padding: 5px;
+}
+.alert{
+  color:red;
+  font-size: 60px;
 }
 
 
