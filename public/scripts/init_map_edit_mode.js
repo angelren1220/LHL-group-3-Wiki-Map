@@ -205,3 +205,8 @@ $(document).ready(function() {
 
 });
 
+// Get a reference to the map element
+var mapElement = document.getElementById("map");
+
+// Add a new class to the map element
+mapElement.classList.add("edit-map-size");
