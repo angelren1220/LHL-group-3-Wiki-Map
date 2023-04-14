@@ -14,7 +14,7 @@
   border: solid #136F63 5px;
   border-radius: 10px;
   padding: 5px;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
   width: 100%;
   font-size: 30px;
 }
@@ -88,4 +88,15 @@ button{
 button:hover {
   filter: brightness(70%);
   cursor: pointer;
+}
+
+.list-buttons{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+  justify-content: flex-end;
+}
+
+.viewpins{
+  margin-left:5px ;
 }
