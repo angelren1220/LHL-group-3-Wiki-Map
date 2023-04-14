@@ -27,14 +27,6 @@
   align-items: center;
 }
 
-.pin-img {
-  width: 20em;
-  height: 20em;
-  margin-left: 2%;
-  margin-bottom: 3%;
-  align-self: flex-end;
-}
-
 body {
   display: flex;
   flex-direction: column;
@@ -121,7 +113,19 @@ iframe{
   width:900px;
   padding-top: 30px;
 }
+.close_edit{
+  font-family: sans-serif;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+}
 
+#finishEditing{
+  background-color: red;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 5px;
+}
 
 
 @media (max-width: 768px) {
