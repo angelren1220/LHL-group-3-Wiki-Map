@@ -32,7 +32,7 @@ const contentString = (pin, isEditable) => {
   }
 
   if (isEditable) {
-    console.log('⛷',  pin);
+   
     outputBuffer += `<a href="/maps/editmode/${pin.map_id}" class="button map_pin_edit">Open Edit Mode</a>`;
   }
 
@@ -45,7 +45,7 @@ const contentString = (pin, isEditable) => {
   if (!pin.name && !pin.description && !pin.image_url) {
     outputBuffer = `<p> Anonymous Pin <p>`;
     if (isEditable) {
-      console.log('⛷',  pin);
+
       outputBuffer += `<a href="/maps/editmode/${pin.map_id}" class="button map_pin_edit">Open Edit Mode</a>`;
     }
   }
