@@ -1,7 +1,7 @@
 $(() => {
   $.ajax({
     method: 'GET',
-    url: '/maps/api/pins'
+    url: '/maps/api/:id/pins'
   })
     .then((data) => {
       const $pinsList = $('#pins');

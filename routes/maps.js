@@ -16,13 +16,53 @@ router.get('/list', (req, res) => {
   if (!userId) {
     return res.redirect('/');
   }
-  mapsQueries.getMapsWithUserId(user.user_name).then((data) => {
+  mapsQueries.getMapsWithUserId(userId).then((data) => {
     const templateVars = { maps: data, user };
     res.render('maps_list', templateVars);
   });
 });
 
 router.get('/api/list', (req, res) => {
+  const userId = req.session.user_id;
+  if (!userId) {
+    return res.redirect('/');
+  }
+  console.log(`sending data for user id: ${userId}`);
+  mapsQueries.getMapsWithUserId(userId).then((data) => {
+    res.json(data);
+  });
+
+});
+
+router.get('/:id/pins', (req, res) => {
+  const userId = req.session.user_id;
+  const mapId = req.params.id;
+  const user = {
+    userId,
+    userName: req.session.user_name
+   };
+
+  if (!userId) {
+    return res.redirect('/');
+  }
+  mapsQueries.getPinsByMapId(mapId).then((data) => {
+    const templateVars = { maps: data, user };
+    res.render('pins_new', templateVars);
+  });
+});
+
+router.get('/api/:id/pins', (req, res) => {
+  const mapId = req.params.id;
+  if (!userId) {
+    return res.redirect('/');
+  }
+  mapsQueries.getPinsByMapId(mapId).then((data) => {
+    res.json(data);
+  });
+
+});
+
+router.get('/api/pins', (req, res) => {
   const userId = req.session.user_id;
   if (!userId) {
     return res.redirect('/');
@@ -51,20 +91,6 @@ router.get('/pins/new', (req, res) => {
   const templateVars = { user };
   res.render('pins_new', templateVars);
 });
-
-// router.get('/api/new', (req, res) => {
-//   const userEmail = req.session.user_email;
-//   const user = userQueries.getUserWithEmail(userEmail);
-//   if (!user) {
-//     return res.redirect('/');
-//   }
-//   userQueries.getUserIDWithEmail(userEmail).then((data) => {
-//     res.json(data);
-//   });
-
-// });
-
-
 
 router.get('/mapdata/:id', (req, res) => {
   const mapId = req.params.id;
