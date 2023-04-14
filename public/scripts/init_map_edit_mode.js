@@ -166,7 +166,6 @@ $(document).ready(function() {
       const mapdata = data.data;
       console.log("🎃", mapdata.name);
       $('#mapname').append(`<h3> Edit ${mapdata.name}</h3>`);
-      $('#finishEditing').append(`<a href="/maps/${myUrl2}" class="close_edit">Close Edit Mode</a>`)
     }
   }).then((data) => {
     console.log("🐶", data);
