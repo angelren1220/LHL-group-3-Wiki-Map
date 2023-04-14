@@ -37,6 +37,7 @@ router.get('/api/list', (req, res) => {
 router.get('/:id/pins', (req, res) => {
   const userId = req.session.user_id;
   const mapId = req.params.id;
+  console.log(`receiving data for ${mapId}`);
   const user = {
     userId,
     userName: req.session.user_name
@@ -53,10 +54,9 @@ router.get('/:id/pins', (req, res) => {
 
 router.get('/api/:id/pins', (req, res) => {
   const mapId = req.params.id;
-  if (!userId) {
-    return res.redirect('/');
-  }
+  console.log(`sending data for ${mapId}`);
   mapsQueries.getPinsByMapId(mapId).then((data) => {
+    console.log(`sending pins data for mapid: }`);
     res.json(data);
   });
 
