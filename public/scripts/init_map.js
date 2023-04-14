@@ -38,6 +38,7 @@ const contentString = (pin, isEditable) => {
   }
 
   if (isEditable) {
+    console.log('⛷',  pin);
     outputBuffer += `<a href="/maps/editmode/${pin.map_id}" class="button map_pin_edit">Open Edit Mode</a>`;
   }
 

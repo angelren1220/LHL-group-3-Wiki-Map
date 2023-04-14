@@ -36,15 +36,58 @@ const addPin = (pin) => {
      RETURNING *;`,
       [Number(pin.user_id), Number(pin.map_id), Number(pin.lat), Number(pin.lng), pin.name, pin.description, pin.image_url])
     .then(() => {
-      return "Add new pin successfully";
+      return "Add new pin successful";
     })
     .catch((err) => {
       console.log(err.message);
     });
 };
 
+const editPin = (pin) => {
+  console.log('🥎', pin);
+
+  return db.
+    query(`
+      UPDATE pins
+      SET
+        lat = $2,
+        lng = $3,
+        name = $4,
+        description = $5,
+        image_url = $6
+
+      WHERE id = $1;
+     `,
+      [pin.id, pin.lat, pin.lng, pin.name, pin.description, pin.image_url]
+    )
+    .then(() => {
+      return "Edit new pin successful";
+    })
+    .catch((err) => {
+      console.log('🧀', err.message);
+    });
+};
+
+const getPinObjWithId = (pin_id) => {
+  return db.
+    query(`
+      SELECT *
+      FROM pins
+      WHERE id = $1;`,
+      [pin_id]
+    )
+    .then((data) => {
+      return data.rows[0];
+    })
+    .catch((err) => {
+      console.log('🧀', err.message);
+    });
+};
+
 module.exports = {
   getPins,
   getPinsWithUserId,
-  addPin
+  addPin,
+  editPin,
+  getPinObjWithId,
 };
