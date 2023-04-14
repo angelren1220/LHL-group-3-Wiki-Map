@@ -15,6 +15,7 @@ const avgPinLocation = (pinData) => {
   return { lat: avgLat, lng: avgLng };
 };
 
+
 //html for pin info window
 const contentString = (pin, isEditable) => {
 
@@ -37,7 +38,7 @@ const contentString = (pin, isEditable) => {
   }
 
   if (isEditable) {
-    outputBuffer += `<button id="map_pin_edit" onclick="/">Edit Pin</button>`;
+    outputBuffer += `<a href="/maps/editmode/${pin.map_id}" class="button map_pin_edit">Open Edit Mode</a>`;
   }
 
   outputBuffer += "</div>";
@@ -133,8 +134,6 @@ $(document).ready(function() {
   let myUrl1 = myUrl[0];
   let myUrl2 = myUrl[1];
 
-
-
   if (!myUrl1) {
     myUrl = 1;
   }
@@ -156,6 +155,7 @@ $(document).ready(function() {
       //create a map and load pins - load info windows and event listeners for each pin
       //pinData is an array of objects. Each pin object must have: lat and lng, and can optionally have: name, description, image_url
       initMap(pinData, avgPinLocation(pinData), calcZoomFactor(pinData), isPindataEditable);
+
     },
   });
   $.ajax({

@@ -100,6 +100,15 @@ router.get('/pins/:id', (req, res) => {
   }).catch((err) => { '🐠', err; });
 });
 
+router.get('/editmode/:id', (req, res) => {
+  const user = {
+    userId: req.session.user_id,
+    userName: req.session.user_name
+  };
+  const templateVars = { user };
+  res.render('maps_editmode', templateVars);
+});
+
 //display map with given map id, user info passed for navbar
 router.get('/:id', (req, res) => {
   const user = {

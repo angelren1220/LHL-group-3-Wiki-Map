@@ -1,6 +1,8 @@
 // Initialize and add the map
+console.log('🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕');
 let map;
 let markers = [];
+
 
 //calculate average pin location
 const avgPinLocation = (pinData) => {
@@ -129,18 +131,15 @@ async function initMap(mapPinData, avgPinLocation, zoom, isPindataEditable) {
 
 $(document).ready(function() {
   //get map_id from url
-  let myUrl = window.location.pathname.split('/')[2];
-  let myUrl1 = myUrl[0];
-  let myUrl2 = myUrl[1];
+  let myUrl = window.location.pathname.split('/');
+  let myUrl1 = myUrl[2];
+  let myUrl2 = myUrl[3];
 
+  console.log('🫐',myUrl);
 
-
-  if (!myUrl1) {
-    myUrl = 1;
-  }
   //get pin data from given map_id
   $.ajax({
-    url: `/maps/pins/${myUrl1}`,
+    url: `/maps/pins/${myUrl2}`,
     success: function(data) {
       let pinData = data.templateVars.data;
       let currentUser = data.templateVars.user;
@@ -159,11 +158,12 @@ $(document).ready(function() {
     },
   });
   $.ajax({
-    url: `/maps/mapdata/${myUrl1}`,
+    url: `/maps/mapdata/${myUrl2}`,
     success: function(data) {
       const mapdata = data.data;
       console.log("🎃", mapdata.name);
-      $('#mapname').append(`<h3>${mapdata.name}</h3>`);
+      $('#mapname').append(`<h3> Edit ${mapdata.name}</h3>`);
+      $('#map').append(`<a href="/maps/${myUrl2}" class="close_edit">Close Edit Mode</a>`)
     }
   }).then((data) => {
     console.log("🐶", data);
