@@ -1,5 +1,4 @@
 // Initialize and add the map
-console.log('🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕');
 let map;
 let markers = [];
 
@@ -17,13 +16,12 @@ const avgPinLocation = (pinData) => {
   return { lat: avgLat, lng: avgLng };
 };
 
-//html for pin info window
+//html for pin info window in edit mode
 const contentString = (pin) => {
 
   if (!pin.name && !pin.description && !pin.image_url) {
     return `<p> Anonymous Pin <p>`;
   }
-  console.log('🏈', pin)
 
   let outputBuffer =
     `<div class="pin-form">
@@ -167,7 +165,6 @@ $(document).ready(function() {
   let myUrl1 = myUrl[2];
   let myUrl2 = myUrl[3];
 
-  console.log('🫐', myUrl);
 
   //get pin data from given map_id
   $.ajax({
@@ -175,10 +172,8 @@ $(document).ready(function() {
     success: function(data) {
       let pinData = data.templateVars.data;
       let currentUser = data.templateVars.user;
-      console.log('🍓', pinData[0].user_id, currentUser.userId);
       const mapCreatorId = pinData[0].user_id;
       const userId = currentUser.userId;
-      console.log('🥨', pinData);
 
       let isPindataEditable = false;
       if (mapCreatorId === userId) {
@@ -195,13 +190,10 @@ $(document).ready(function() {
   $.ajax({
     url: `/maps/mapdata/${myUrl2}`,
     success: function(data) {
-      const mapdata = data.data;
-      console.log("🎃", mapdata.name);
+      const mapdata = data.data
       $('#mapname').append(`<h3> Edit ${mapdata.name}</h3>`);
     }
-  }).then((data) => {
-    console.log("🐶", data);
-  });
+  })
 
 });
 

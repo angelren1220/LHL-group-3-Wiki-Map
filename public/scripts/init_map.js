@@ -32,7 +32,6 @@ const contentString = (pin, isEditable) => {
   }
 
   if (isEditable) {
-    console.log('⛷',  pin);
     outputBuffer += `<a href="/maps/editmode/${pin.map_id}" class="button map_pin_edit">Open Edit Mode</a>`;
   }
 
@@ -45,7 +44,6 @@ const contentString = (pin, isEditable) => {
   if (!pin.name && !pin.description && !pin.image_url) {
     outputBuffer = `<p> Anonymous Pin <p>`;
     if (isEditable) {
-      console.log('⛷',  pin);
       outputBuffer += `<a href="/maps/editmode/${pin.map_id}" class="button map_pin_edit">Open Edit Mode</a>`;
     }
   }
@@ -156,10 +154,9 @@ $(document).ready(function() {
         $('#map').text('Add at least one pin to view the map').addClass('alert');
       }
       // if user is not login, alert text
-      console.log('🍓', pinData[0].user_id, currentUser.userId);
+
       const mapCreatorId = pinData[0].user_id
       const userId = currentUser.userId
-      console.log('🥨', pinData)
 
       let isPindataEditable = false;
       if (mapCreatorId === userId) {
@@ -175,12 +172,8 @@ $(document).ready(function() {
     url: `/maps/mapdata/${myUrl1}`,
     success: function(data) {
       const mapdata = data.data;
-      console.log("🎃", mapdata.name);
       $('#mapname').append(`<h3>${mapdata.name}</h3>`);
     }
-  }).then((data) => {
-    console.log("🐶", data);
-  });
-
+  })
 });
 
