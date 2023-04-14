@@ -41,6 +41,11 @@ input{
   line-height: 15px;
 }
 
+input:focus {
+  outline: none;
+  box-shadow: 0 0 10px #136F63;
+}
+
 form{
 display: flex;
 flex-direction: column;
