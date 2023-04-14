@@ -41,7 +41,7 @@ router.post("/logout", (req, res) => {
   // Clear user id and name from the session and redirect to home page
   req.session.user_id = null;
   req.session.user_name = null;
-  res.redirect("/");
+  res.redirect("login");
 });
 
 // Route to register a new user

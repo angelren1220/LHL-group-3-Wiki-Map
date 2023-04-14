@@ -144,7 +144,7 @@ router.get('/editmode/:id', (req, res) => {
   // Get the map data from the database
   console.log('🏓', user);
   mapsQueries.getMapData(user.mapId).then((data) => {
-  
+
     if (data.user_id !== user.userId) {
       res.redirect(`/maps/${data.id}`);
     }
@@ -185,7 +185,8 @@ router.post("/new", (req, res) => {
 // route to create new pin
 router.post("/:id/pins/new", (req, res) => {
   let pin = req.body;
-  pin.map_id = req.params.id;
+  const mapId = req.params.id;
+  pin.map_id = mapId;
   pin.user_id = req.session.user_id;
   console.log(pin);
 
@@ -196,7 +197,7 @@ router.post("/:id/pins/new", (req, res) => {
       if (!pin) {
         return res.send({ error: "error" });
       }
-      res.redirect("/maps/list");
+      res.redirect(`/maps/${mapId}/pins`);
     })
     .catch((err) => res.send(err));
 });
