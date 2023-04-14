@@ -1,11 +1,10 @@
 const express = require('express');
 const mapsQueries = require('../db/queries/maps');
-const userQueries = require('../db/queries/users');
 const pinsQueries = require('../db/queries/pins');
 
 const router = express.Router();
 
-// get methods
+// Handle GET request to '/list' route
 router.get('/list', (req, res) => {
   const userId = req.session.user_id;
   const user = {
@@ -13,27 +12,36 @@ router.get('/list', (req, res) => {
     userName: req.session.user_name
   };
 
+
+  // If user is not logged in, redirect to homepage
   if (!userId) {
     return res.redirect('/');
   }
+
+  // Get maps data from database and render template with user and map data
   mapsQueries.getMapsWithUserId(userId).then((data) => {
     const templateVars = { maps: data, user };
     res.render('maps_list', templateVars);
   });
 });
 
+// Handle GET request to '/api/list' route
 router.get('/api/list', (req, res) => {
   const userId = req.session.user_id;
+
+  // If user is not logged in, redirect to homepage
   if (!userId) {
     return res.redirect('/');
   }
-  console.log(`sending data for user id: ${userId}`);
+
+  // Get maps data from database and send as JSON response
   mapsQueries.getMapsWithUserId(userId).then((data) => {
     res.json(data);
   });
 
 });
 
+// Get pins list for a map
 router.get('/:id/pins', (req, res) => {
   const userId = req.session.user_id;
   const mapId = req.params.id;
@@ -43,37 +51,32 @@ router.get('/:id/pins', (req, res) => {
     userName: req.session.user_name
    };
 
+  // Redirect to homepage if user is not logged in
   if (!userId) {
     return res.redirect('/');
   }
+
+  // Get pins data for the given map id and render the pins list template
   mapsQueries.getPinsByMapId(mapId).then((data) => {
     const templateVars = { maps: data, user };
     res.render('pins_list', templateVars);
   });
 });
 
+// Get pins list data for a map in API format
 router.get('/api/:id/pins', (req, res) => {
   const mapId = req.params.id;
-  console.log(`sending data for ${mapId}`);
+
+  // Get pins data for the given map id and send it as a JSON response
   mapsQueries.getPinsByMapId(mapId).then((data) => {
-    console.log(`sending pins data for mapid: }`);
+
     res.json(data);
+
   });
 
 });
 
-router.get('/api/pins', (req, res) => {
-  const userId = req.session.user_id;
-  if (!userId) {
-    return res.redirect('/');
-  }
-  console.log(`sending data for user id: ${userId}`);
-  mapsQueries.getMapsWithUserId(userId).then((data) => {
-    res.json(data);
-  });
-
-});
-
+// route to render new map page
 router.get('/new', (req, res) => {
   const user = {
     userId: req.session.user_id,
@@ -83,6 +86,7 @@ router.get('/new', (req, res) => {
   res.render('maps_new', templateVars);
 });
 
+// route to render new pins page
 router.get('/pins/new', (req, res) => {
   const user = {
     userId: req.session.user_id,
@@ -92,8 +96,11 @@ router.get('/pins/new', (req, res) => {
   res.render('pins_list', templateVars);
 });
 
+// route to render map_display
 router.get('/mapdata/:id', (req, res) => {
   const mapId = req.params.id;
+
+  // Get the user data from the session cookie
   const user = {
     userId: req.session.user_id,
     userName: req.session.user_name
@@ -102,6 +109,8 @@ router.get('/mapdata/:id', (req, res) => {
   if (!mapId) {
     return null;
   };
+
+  // Get the map data from the database and render the map_display template
   mapsQueries.getMapData(mapId).then((data) => {
     const templateVars = { data, user };
     console.log('🐹', templateVars);
@@ -109,10 +118,7 @@ router.get('/mapdata/:id', (req, res) => {
   });
 });
 
-router.get('/test', (req, res) => {
-  res.render('maps_display', templateVars);
-});
-
+// route to get pins
 router.get('/pins/:id', (req, res) => {
   const mapId = req.params.id;
   const user = {
@@ -120,23 +126,30 @@ router.get('/pins/:id', (req, res) => {
     userName: req.session.user_name
   };
 
+  // Get the pins for the map from the database and return as JSON data
   mapsQueries.getPinsByMapId(mapId).then((data) => {
     const templateVars = { data, user };
     res.json({ templateVars });
   }).catch((err) => { '🐠', err; });
 });
 
+// route to eidtmode for map
 router.get('/editmode/:id', (req, res) => {
   const user = {
     userId: req.session.user_id,
     userName: req.session.user_name,
     mapId: req.params.id
   };
+
+  // Get the map data from the database
   console.log('🏓', user);
   mapsQueries.getMapData(user.mapId).then((data) => {
+  
     if (data.user_id !== user.userId) {
       res.redirect(`/maps/${data.id}`);
     }
+
+    // Render the maps_editmode template
     const templateVars = { user };
     res.render('maps_editmode', templateVars);
   });
@@ -152,12 +165,12 @@ router.get('/:id', (req, res) => {
   res.render('maps_display', templateVars);
 });
 
-// post method
+// route to create new map
 router.post("/new", (req, res) => {
   let map = req.body;
   map.user_id = req.session.user_id;
 
-  //console.log(map);
+  // use queries script to add map
   mapsQueries
     .addMap(map)
     .then((map) => {
@@ -169,11 +182,14 @@ router.post("/new", (req, res) => {
     .catch((err) => res.send(err));
 });
 
+// route to create new pin
 router.post("/:id/pins/new", (req, res) => {
   let pin = req.body;
   pin.map_id = req.params.id;
   pin.user_id = req.session.user_id;
   console.log(pin);
+
+  // use queries script to add pin
   pinsQueries
     .addPin(pin)
     .then((pin) => {
@@ -185,6 +201,7 @@ router.post("/:id/pins/new", (req, res) => {
     .catch((err) => res.send(err));
 });
 
+// route to edit pin
 router.post("/pins/edit/:id", (req, res) => {
   let pin = req.body;
   pin.user_id = req.session.user_id;
@@ -205,8 +222,11 @@ router.post("/pins/edit/:id", (req, res) => {
 
 });
 
+// route to delete the map
 router.post("/delete/:id", (req, res) => {
   const id = req.params.id;
+
+  // use queries script to delete map
   mapsQueries.deleteMap(id).then(() => {
     res.redirect("/maps/list");
   });
