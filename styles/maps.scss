@@ -14,16 +14,17 @@
   color:#136F63
 }
 
+.alert{
+  font-size: 30px;
+  font-family: sans-serif;
+  color:#6f3613
+}
+
 .pin-info {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
-
-.pin-text {
-  display: flex;
-  flex-direction: column;
 }
 
 .pin-img {

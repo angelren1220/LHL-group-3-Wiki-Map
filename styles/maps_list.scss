@@ -14,7 +14,7 @@
   border: solid #136F63 5px;
   border-radius: 10px;
   padding: 5px;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
   width: 100%;
   font-size: 30px;
 }
@@ -60,11 +60,23 @@ font-size: 25px;
   font-size: 25px;
 }
 
+.pin-input:focus {
+  outline: none;
+  box-shadow: 0 0 10px #136F63;
+}
+
+
+
 textarea{
   border: solid #136F63 3px;
   border-radius: 10px;
   background-color: beige;
   font-size: 25px;
+}
+
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 10px #136F63;
 }
 
 .description{
@@ -81,7 +93,27 @@ button{
   border-radius: 5px;
 }
 
+.viewpins{
+  background-color: #136F63;
+}
+
 button:hover {
   filter: brightness(70%);
   cursor: pointer;
+}
+
+.list-buttons{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+  justify-content: flex-end;
+}
+
+.viewpins{
+  margin-left:5px ;
+}
+
+.pins_list_button{
+  margin-left: 193px;
+  width: 80px;
 }

@@ -29,7 +29,7 @@ router.post("/login", (req, res) => {
     req.session.user_id = user.id;
     req.session.user_name = user.name;
     //console.log(`login as ${user.id}`);
-    res.redirect("/");
+    res.redirect("/maps/list");
   });
 });
 

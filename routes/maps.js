@@ -16,13 +16,53 @@ router.get('/list', (req, res) => {
   if (!userId) {
     return res.redirect('/');
   }
-  mapsQueries.getMapsWithUserId(user.user_name).then((data) => {
+  mapsQueries.getMapsWithUserId(userId).then((data) => {
     const templateVars = { maps: data, user };
     res.render('maps_list', templateVars);
   });
 });
 
 router.get('/api/list', (req, res) => {
+  const userId = req.session.user_id;
+  if (!userId) {
+    return res.redirect('/');
+  }
+  console.log(`sending data for user id: ${userId}`);
+  mapsQueries.getMapsWithUserId(userId).then((data) => {
+    res.json(data);
+  });
+
+});
+
+router.get('/:id/pins', (req, res) => {
+  const userId = req.session.user_id;
+  const mapId = req.params.id;
+  console.log(`receiving data for ${mapId}`);
+  const user = {
+    userId,
+    userName: req.session.user_name
+   };
+
+  if (!userId) {
+    return res.redirect('/');
+  }
+  mapsQueries.getPinsByMapId(mapId).then((data) => {
+    const templateVars = { maps: data, user };
+    res.render('pins_list', templateVars);
+  });
+});
+
+router.get('/api/:id/pins', (req, res) => {
+  const mapId = req.params.id;
+  console.log(`sending data for ${mapId}`);
+  mapsQueries.getPinsByMapId(mapId).then((data) => {
+    console.log(`sending pins data for mapid: }`);
+    res.json(data);
+  });
+
+});
+
+router.get('/api/pins', (req, res) => {
   const userId = req.session.user_id;
   if (!userId) {
     return res.redirect('/');
@@ -49,22 +89,8 @@ router.get('/pins/new', (req, res) => {
     userName: req.session.user_name
   };
   const templateVars = { user };
-  res.render('pins_new', templateVars);
+  res.render('pins_list', templateVars);
 });
-
-// router.get('/api/new', (req, res) => {
-//   const userEmail = req.session.user_email;
-//   const user = userQueries.getUserWithEmail(userEmail);
-//   if (!user) {
-//     return res.redirect('/');
-//   }
-//   userQueries.getUserIDWithEmail(userEmail).then((data) => {
-//     res.json(data);
-//   });
-
-// });
-
-
 
 router.get('/mapdata/:id', (req, res) => {
   const mapId = req.params.id;
@@ -143,8 +169,9 @@ router.post("/new", (req, res) => {
     .catch((err) => res.send(err));
 });
 
-router.post("/pins/new", (req, res) => {
+router.post("/:id/pins/new", (req, res) => {
   let pin = req.body;
+  pin.map_id = req.params.id;
   pin.user_id = req.session.user_id;
   console.log(pin);
   pinsQueries

@@ -18,23 +18,17 @@ const avgPinLocation = (pinData) => {
 
 //html for pin info window
 const contentString = (pin, isEditable) => {
-
-  if (!pin.name && !pin.description && !pin.image_url) {
-    return `<p> Anonymous Pin <p>`;
-  }
-
-  let outputBuffer = `<div class="pin-info"><div class="pin-text">`;
+  let outputBuffer = `
+    <div class="pin-info">
+      <div class="pin-text">
+  `;
 
   if (pin.name) {
-    outputBuffer += `<h1 class="pin-title"> ${pin.name} </h1>`;
-  };
-  if (pin.description) {
-    outputBuffer += `<p class="pin-description"> ${pin.description}</p>`;
-  };
-  outputBuffer += "</div>";
+    outputBuffer += `<h1 class="pin-title">${pin.name}</h1>`;
+  }
 
-  if (pin.image_url) {
-    outputBuffer += `<img class="pin-img" src=${pin.image_url}>`;
+  if (pin.description) {
+    outputBuffer += `<p class="pin-description">${pin.description}</p>`;
   }
 
   if (isEditable) {
@@ -42,9 +36,19 @@ const contentString = (pin, isEditable) => {
     outputBuffer += `<a href="/maps/editmode/${pin.map_id}" class="button map_pin_edit">Open Edit Mode</a>`;
   }
 
-  outputBuffer += "</div>";
+  outputBuffer += `
+      </div>
+      ${pin.image_url ? '<img class="pin-img" src=' + pin.image_url + '>' : ''}
+    </div>
+  `;
+
+  if (!pin.name && !pin.description && !pin.image_url) {
+    return `<p> Anonymous Pin <p>`;
+  }
+
   return outputBuffer;
 };
+
 
 //use range of pin position values to calculate map zoom level
 const calcZoomFactor = (pinData) => {
@@ -144,6 +148,11 @@ $(document).ready(function() {
     success: function(data) {
       let pinData = data.templateVars.data;
       let currentUser = data.templateVars.user;
+      // if there is no pin to show map, alert text
+      if(!pinData.data) {
+        $('#map').text('Add at least one pin to view the map').addClass('alert');
+      }
+      // if user is not login, alert text
       console.log('🍓', pinData[0].user_id, currentUser.userId);
       const mapCreatorId = pinData[0].user_id
       const userId = currentUser.userId

@@ -13,23 +13,16 @@
   <link rel="stylesheet" href="/styles/maps.css" />
   <link rel="stylesheet" href="/styles/maps_list.css" />
   <script src="/vendor/jquery-3.0.0.js"></script>
-
+  <script type="module" defer src="/scripts/pins_list.js"></script>
 </head>
 <%- include('navbar') %>
 <body>
+  <h3>Pins List</h3>
+  <div id="pins"></div>
   <!-- pins -->
   <div class="pin-form">
   <h3>Add a new pin</h3>
-  <form action="/maps/pins/new" method="POST" class="new-pin-form">
-    <div class="add-pin">
-      <label class="pin-label">Map Id</label>
-      <input
-        type="number"
-        name="map_id"
-        placeholder="map id"
-        class="pin-input"
-      />
-    </div>
+  <form method="POST" class="new-pin-form">
     <div class="add-pin">
       <label class="pin-label">Latitude</label>
       <input
@@ -72,7 +65,7 @@
         class="pin-input"
       />
     </div>
-    <button type="submit" class="submit">Add</button>
+    <button type="submit" class="submit pins_list_button">Add</button>
   </form>
   </div>
 </body>
