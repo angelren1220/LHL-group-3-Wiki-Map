@@ -137,12 +137,14 @@ router.get('/pins/:id', (req, res) => {
 router.get('/editmode/:id', (req, res) => {
   const user = {
     userId: req.session.user_id,
-    userName: req.session.user_name
+    userName: req.session.user_name,
+    mapId: req.params.id
   };
 
   // Get the map data from the database
-  mapsQueries.getMapData(req.params.id).then((data) => {
-    // If the user ID does not match the map's user ID, redirect to the map display page
+  console.log('🏓', user);
+  mapsQueries.getMapData(user.mapId).then((data) => {
+  
     if (data.user_id !== user.userId) {
       res.redirect(`/maps/${data.id}`);
     }
@@ -197,6 +199,27 @@ router.post("/:id/pins/new", (req, res) => {
       res.redirect("/maps/list");
     })
     .catch((err) => res.send(err));
+});
+
+// route to edit pin
+router.post("/pins/edit/:id", (req, res) => {
+  let pin = req.body;
+  pin.user_id = req.session.user_id;
+  pin.id = req.params.id;
+  let mapId = pinsQueries.getPinObjWithId(pin.id).then((pinData) => {
+    console.log('🥝', pinData);
+    pinsQueries
+      .editPin(pin)
+      .then((pin) => {
+        if (!pin) {
+          return res.send({ error: "error" });
+        }
+        res.redirect(`/maps/editmode/${pinData.map_id}`);
+      })
+      .catch((err) => res.send(err));
+
+  });
+
 });
 
 // route to delete the map

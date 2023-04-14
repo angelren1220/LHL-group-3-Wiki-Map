@@ -18,31 +18,63 @@ const avgPinLocation = (pinData) => {
 };
 
 //html for pin info window
-const contentString = (pin, isEditable) => {
+const contentString = (pin) => {
 
   if (!pin.name && !pin.description && !pin.image_url) {
     return `<p> Anonymous Pin <p>`;
   }
+  console.log('🏈', pin)
 
-  let outputBuffer = `<div class="pin-info"><div class="pin-text">`;
+  let outputBuffer =
+    `<div class="pin-form">
+    <h3>Add a new pin</h3>
+    <form action="/maps/pins/edit/${pin.id}" method="POST" class="new-pin-form">
+      <div class="add-pin">
+        <label class="pin-label">Latitude</label>
+        <input
+          type="number"
+          name="lat"
+          step=".01"
+          placeholder="${pin.lat}"
+          class="pin-input"
+        />
+      </div>
+      <div class="add-pin">
+        <label class="pin-label">Longitude</label>
+        <input
+          type="number"
+          name="lng"
+          step=".01"
+          placeholder="${pin.lng}"
+          class="pin-input"
+        />
+      </div>
+      <div class="add-pin">
+        <label class="pin-label">Pin Name</label>
+        <input
+          type="text"
+          name="name"
+          placeholder="${pin.name}"
+          class="pin-input"
+        />
+      </div>
+      <div class="add-pin description">
+        <label class="pin-label">Description</label>
+        <textarea placeholder="${pin.description}" name="description" cols="30" rows="10"></textarea>
+      </div>
+      <div class="add-pin">
+        <label class="pin-label">Image URL</label>
+        <input
+          type="text"
+          name="image_url"
+          placeholder="${pin.image_url})"
+          class="pin-input"
+        />
+      </div>
+      <button type="submit" class="submit">Update</button>
+    </form>
+    </div>`;
 
-  if (pin.name) {
-    outputBuffer += `<h1 class="pin-title"> ${pin.name} </h1>`;
-  };
-  if (pin.description) {
-    outputBuffer += `<p class="pin-description"> ${pin.description}</p>`;
-  };
-  outputBuffer += "</div>";
-
-  if (pin.image_url) {
-    outputBuffer += `<img class="pin-img" src=${pin.image_url}>`;
-  }
-
-  if (isEditable) {
-    outputBuffer += `<button id="map_pin_edit" onclick="/">Edit Pin</button>`;
-  }
-
-  outputBuffer += "</div>";
   return outputBuffer;
 };
 
@@ -103,7 +135,7 @@ async function initMap(mapPinData, avgPinLocation, zoom, isPindataEditable) {
   // creates each marker on the map, and attaches infoWindow and event listeners to the markers
   for (let i = 0; i < mapPinData.length; i++) {
     const infowindow = new google.maps.InfoWindow({
-      content: contentString(mapPinData[i], isPindataEditable),
+      content: contentString(mapPinData[i]),
       ariaLabel: mapPinData[i].name || "anon",
     });
 
@@ -135,7 +167,7 @@ $(document).ready(function() {
   let myUrl1 = myUrl[2];
   let myUrl2 = myUrl[3];
 
-  console.log('🫐',myUrl);
+  console.log('🫐', myUrl);
 
   //get pin data from given map_id
   $.ajax({
@@ -144,9 +176,9 @@ $(document).ready(function() {
       let pinData = data.templateVars.data;
       let currentUser = data.templateVars.user;
       console.log('🍓', pinData[0].user_id, currentUser.userId);
-      const mapCreatorId = pinData[0].user_id
-      const userId = currentUser.userId
-      console.log('🥨', pinData)
+      const mapCreatorId = pinData[0].user_id;
+      const userId = currentUser.userId;
+      console.log('🥨', pinData);
 
       let isPindataEditable = false;
       if (mapCreatorId === userId) {

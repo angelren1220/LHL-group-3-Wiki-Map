@@ -71,9 +71,10 @@
   order:4;
   width: 20em;
   height: 20em;
-  margin-left: 2%;
-  margin-bottom: 3%;
+  margin: 10px;
   align-self: flex-end;
+  border: solid #136F63 2px;
+  border-radius: 10px;
 }
 
 .map_pin_edit{
