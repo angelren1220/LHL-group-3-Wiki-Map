@@ -1,5 +1,5 @@
 {
-  "name": "node-skeleton",
+  "name": "wiki-map",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,7 +9,7 @@
     "local": "./node_modules/.bin/nodemon -L --ignore public/",
     "db:reset": "node bin/resetdb.js"
   },
-  "author": "Lighthouse Labs",
+  "author": "Angel Linxue Ren, Oliver Dixon, Kade Kobussen",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
