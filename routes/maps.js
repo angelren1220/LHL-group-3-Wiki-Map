@@ -45,7 +45,7 @@ router.get('/api/list', (req, res) => {
 router.get('/:id/pins', (req, res) => {
   const userId = req.session.user_id;
   const mapId = req.params.id;
-  console.log(`receiving data for ${mapId}`);
+
   const user = {
     userId,
     userName: req.session.user_name
@@ -113,7 +113,7 @@ router.get('/mapdata/:id', (req, res) => {
   // Get the map data from the database and render the map_display template
   mapsQueries.getMapData(mapId).then((data) => {
     const templateVars = { data, user };
-    console.log('🐹', templateVars);
+
     res.json(templateVars);
   });
 });
@@ -142,7 +142,7 @@ router.get('/editmode/:id', (req, res) => {
   };
 
   // Get the map data from the database
-  console.log('🏓', user);
+
   mapsQueries.getMapData(user.mapId).then((data) => {
 
     if (data.user_id !== user.userId) {
@@ -188,7 +188,7 @@ router.post("/:id/pins/new", (req, res) => {
   const mapId = req.params.id;
   pin.map_id = mapId;
   pin.user_id = req.session.user_id;
-  console.log(pin);
+
 
   // use queries script to add pin
   pinsQueries
@@ -208,7 +208,7 @@ router.post("/pins/edit/:id", (req, res) => {
   pin.user_id = req.session.user_id;
   pin.id = req.params.id;
   let mapId = pinsQueries.getPinObjWithId(pin.id).then((pinData) => {
-    console.log('🥝', pinData);
+
     pinsQueries
       .editPin(pin)
       .then((pin) => {
