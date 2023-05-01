@@ -1,6 +1,8 @@
 # Wiki Map Project
 
-Wiki Map is a web app that allows users to collaboratively create maps which list multiple pins.
+## Project Description
+
+Wiki Map is a collaborative web application that enables users to create interactive maps with multiple pins. The app is built using the Google Maps Platform, and users can register and login to create, delete, and edit maps, as well as add, delete, and modify pins on the map. This user-friendly application encourages collaboration and facilitates easy sharing of information.
 
 ## Final Product
 
